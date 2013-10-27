@@ -13,10 +13,10 @@ This project contains examples for implementing all of SOOMLA's interfaces and u
     $ git clone git@github.com:cocos2d/cocos2d-x.git
     ```
 
-2. Recursively clone our [cocos2dx-store](https://github.com/ronmrdechai/cocos2dx-store) library into the `extensions` directory in the root of your Cocos2d-x framework.
+2. Recursively clone our [cocos2dx-store](https://github.com/soomla/cocos2dx-store) library into the `extensions` directory in the root of your Cocos2d-x framework.
     ```
     $ cd cocos2dx
-    $ git clone --recursive git@github.com:ronmrdechai/cocos2dx-store.git extensions/cocos2dx-store
+    $ git clone --recursive git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
     ```
 
 3. Clone our [fork](https://github.com/vedi/jansson) of the janssen library into the `external` directory in the root of your Cocos2d-x framework.
@@ -26,7 +26,7 @@ This project contains examples for implementing all of SOOMLA's interfaces and u
 
 4. Clone this repository into the `projects` directory at the root of your framework.
     ```
-    $ git clone git@github.com:ronmrdechai/cocos2dx-store-example.git projects/cocos2dx-store-example
+    $ git clone git@github.com:soomla/cocos2dx-store-example.git projects/cocos2dx-store-example
     ```
 
 5. Run the `build_native.sh` script located in projects/cocos2dx-store-example/proj.android. This step should take a while.
@@ -48,7 +48,7 @@ Coming soon...
 
 #### IStoreAssets
 
-A good example of how to define an economy model can be found in [MuffinRushAssets](https://github.com/ronmrdechai/cocos2dx-store-example/blob/master/Classes/MuffinRushAssets.cpp).
+A good example of how to define an economy model can be found in [MuffinRushAssets](https://github.com/soomla/cocos2dx-store-example/blob/master/Classes/MuffinRushAssets.cpp).
 
 Take a look at that file and see how you can define your specific game's economy.
 
