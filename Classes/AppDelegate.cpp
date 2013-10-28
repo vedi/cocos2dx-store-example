@@ -38,6 +38,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	soomla::CCSoomla::sharedSoomla()->setAndroidPublicKey("ExamplePublicKey");
 	soomla::CCSoomla::sharedSoomla()->setCustomSecret("ExampleCustomSecret");
 	soomla::CCSoomla::sharedSoomla()->setAndroidTestMode(true);
+    soomla::CCSoomla::sharedSoomla()->setSSV(false);
 	
 	soomla::CCSoomla::sharedSoomla()->addEventHandler(handler);
 
