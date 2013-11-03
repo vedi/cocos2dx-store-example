@@ -49,21 +49,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	MuffinRushAssets *assets = MuffinRushAssets::create();
 	soomla::CCStoreController::createShared(assets);
 
-    // Add 10,000 of each currency if this is our first run.
+    // Add 10,000 of each currency if the balance drops under 5,000
     // Of course, this is just for testing...
-    bool first =
-        CCUserDefault::sharedUserDefault()->getBoolForKey(FIRST_RUN, true);
-    if (first) {
-        CCArray *currencies = assets->getCurrencies();
-        for (int i = 0; i < currencies->count(); i++) {
-            soomla::CCVirtualCurrency *vc =
-                dynamic_cast<soomla::CCVirtualCurrency *>(currencies->
-                                                          objectAtIndex(i));
-            soomla::CCStoreInventory::sharedStoreInventory()->
-                giveItem(vc->getItemId()->getCString(), 10000, NULL);
-        }
-        CCUserDefault::sharedUserDefault()->setBoolForKey(FIRST_RUN, false);
-    }        
+    CCArray *currencies = assets->getCurrencies();
+	for (int i = 0; i < currencies->count(); i++) {
+		int balance = soomla::CCStoreInventory::sharedStoreInventory()->
+			getItemBalance(vc->getItemId()->getCString(), NULL);
+		if (balance < 5000) {
+			soomla::CCStoreInventory::sharedStoreInventory()->
+				giveItem(vc->getItemId()->getCString(), 10000, NULL);
+		}
+	}
 	
 	CCDirector::sharedDirector()->setOpenGLView(CCEGLView::sharedOpenGLView());
 	// Disable FPS counter
