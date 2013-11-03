@@ -60,7 +60,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
                 dynamic_cast<soomla::CCVirtualCurrency *>(currencies->
                                                           objectAtIndex(i));
             soomla::CCStoreInventory::sharedStoreInventory()->
-                giveItem(vc->getItemId()->getCString(), 100000, NULL);
+                giveItem(vc->getItemId()->getCString(), 10000, NULL);
         }
         CCUserDefault::sharedUserDefault()->setBoolForKey(FIRST_RUN, false);
     }        
