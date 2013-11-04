@@ -14,8 +14,6 @@ LOCAL_SRC_FILES := jni_init/main.cpp \
                    ../../Classes/MuffinRushAssets.cpp \
                    ../../Classes/StoreAScene.cpp \
                    ../../Classes/StoreBScene.cpp \
-                   ../../Classes/CCListView/CCListView.cpp \
-                   ../../Classes/CCListView/CCListViewCell.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
