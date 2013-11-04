@@ -50,8 +50,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	MuffinRushAssets *assets = MuffinRushAssets::create();
 	soomla::CCStoreController::createShared(assets);
 
-    // Add 10,000 of each currency if the balance drops under 5,000
-    // Of course, this is just for testing...
+	/*
+	 * ** Set the amount of each currency to 10,000 if the **
+     * ** balance drops under 1,000                        **
+	 *
+	 * ** Of course, this is just for testing...           **
+	 */
+
     CCArray *currencies = assets->getCurrencies();
 	CCObject *currencyObject;
 	CCARRAY_FOREACH(currencies, currencyObject) {
@@ -61,7 +66,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 			getItemBalance(vc->getItemId()->getCString(), NULL);
 		if (balance < 1000) {
 			soomla::CCStoreInventory::sharedStoreInventory()->
-				giveItem(vc->getItemId()->getCString(), 10000, NULL);
+				giveItem(vc->getItemId()->getCString(), 10000 - balance, NULL);
 		}
 	}
 	
