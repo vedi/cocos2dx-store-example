@@ -94,7 +94,6 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
     for (int i = 0; i < NUMBER_OF_ROWS; i++) {
         string itemId = itemIdFromTag(i);
         if (itemId != "ERROR") {
-            int tag = i;
             std::string name = " ";
             std::string info = " ";
 
