@@ -1,14 +1,11 @@
 //
 // Created by Alexandr on 31.05.13.
 //
-// To change the template use AppCode | Preferences | File Templates.
-//
 
 
 #include "StoreAScene.h"
 #include "MainScene.h"
 #include "StoreBScene.h"
-#include "SoomlaIncludes.h"
 #include "CCPurchaseWithMarket.h"
 #include "CCPurchaseWithVirtualItem.h"
 #include "EventHandler.h"
@@ -22,7 +19,7 @@ StoreAScene::StoreAScene() {
     mMainNode = NULL;
     mTopNode = NULL;
     mMuffinAmount = NULL;
-    mGoodsListView = NULL;
+    mGoodsTableView = NULL;
     for(int i = 0; i < NUMBER_OF_ROWS; i++ ) {
         mListRows[i] = NULL;
         mListItem[i] = NULL;
@@ -39,42 +36,42 @@ StoreAScene::~StoreAScene() {
     }
 }
 
-SEL_CCControlHandler StoreAScene::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
-    return NULL;
-}
-
 bool StoreAScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", CCNode*, mBackgroundNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackground", CCLayerColor*, mBackground);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode*, mMainNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", CCNode*, mTopNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", CCLabelTTF*, mMuffinAmount);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoodsListView", CCListView*, mGoodsListView);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", CCNode*, mBackgroundNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackground", CCLayerColor*, mBackground)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode*, mMainNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", CCNode*, mTopNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", CCLabelTTF*, mMuffinAmount)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoodsTableView", CCTableView*, mGoodsTableView)
     if(strcmp(pMemberVariableName, "mListRows") == 0) {
-        mListRows[pNode->getTag()] = static_cast<CCListViewCell*>(pNode);
+        mListRows[pNode->getTag()] = static_cast<CCTableViewCell*>(pNode);
         return true;
     } else if(strcmp(pMemberVariableName, "mListItem") == 0) {
         mListItem[pNode->getTag()] = dynamic_cast<LevelIconWidget*>(pNode);
         return true;
     }
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", CCNode*, mBottomNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonBack", CCMenuItemImage*, mButtonBack);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonMoreMuffins", CCMenuItemImage*, mButtonMoreMuffins);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", CCNode*, mBottomNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonBack", CCMenuItemImage*, mButtonBack)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonMoreMuffins", CCMenuItemImage*, mButtonMoreMuffins)
 
     return false;
 }
 
 void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
+    CC_UNUSED_PARAM(pNode);
+    CC_UNUSED_PARAM(pNodeLoader);
+
     CC_ASSERT(mBackgroundNode);
     CC_ASSERT(mBackground);
     CC_ASSERT(mMainNode);
     CC_ASSERT(mTopNode);
     CC_ASSERT(mMuffinAmount);
-    CC_ASSERT(mGoodsListView);
+        CC_ASSERT(mGoodsTableView);
     for(int i = 0; i < NUMBER_OF_ROWS; i++ ) {
         CC_ASSERT(mListRows[i]);
         mListRows[i]->retain();
         mListRows[i]->removeFromParentAndCleanup(false);
+        mListRows[i]->setPosition(CCPointZero);
 
         CC_ASSERT(mListItem[i]);
     }
@@ -88,6 +85,7 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
     shiftToTop(mTopNode);
     shiftToBottom(mBottomNode);
 
+
     CCStoreController::sharedStoreController()->storeOpening();
 
     ////*****
@@ -98,7 +96,9 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
             std::string info = " ";
 
             CCSoomlaError *soomlaError = NULL;
-            CCVirtualItem *virtualItem = CCStoreInfo::sharedStoreInfo()->getItemByItemId(itemId.c_str(), &soomlaError);
+
+            CCVirtualItem *virtualItem;
+            virtualItem = CCStoreInfo::sharedStoreInfo()->getItemByItemId(itemId.c_str(), &soomlaError);
             if (!soomlaError) {
                 name = virtualItem->getName()->getCString();
                 info = virtualItem->getDescription()->getCString();
@@ -109,12 +109,21 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
             soomlaError = NULL;
             int balance = CCStoreInventory::sharedStoreInventory()->getItemBalance(itemId.c_str(), &soomlaError);
             if (soomlaError) {
-                CCStoreUtils::logException("StoreAScene::setPriceBalanceLabel", soomlaError);
+                CCStoreUtils::logException("StoreAScene::getItemBalance", soomlaError);
                 balance = 0;
+                CC_ASSERT(false);
+            }
+            if (itemId.compare("show_room") == 0 || itemId.compare("delivery_vehicle") == 0) {
+                setProgressForItem(itemId, mListItem[i]);
+            }
+            else if (itemId.compare("fat_cat") == 0
+                    || itemId.compare("happi_hippo") == 0
+                    || itemId.compare("funkey_monkey") == 0) {
+                setEquippedForItem(itemId, mListItem[i]);
             }
 
             CCPurchasableVirtualItem *purchasableVirtualItem = dynamic_cast<CCPurchasableVirtualItem *>(virtualItem);
-            float price;
+            double price;
             if (purchasableVirtualItem != NULL) {
                 CCPurchaseType *purchaseType = purchasableVirtualItem->getPurchaseType();
                 if (dynamic_cast<CCPurchaseWithMarket *>(purchaseType)) {
@@ -128,20 +137,15 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
                 price = -1;
             }
 
-            mListItem[i]->setData(virtualItem->getItemId()->getCString(), name.c_str(), info.c_str(), price, balance);
+            mListItem[i]->setData(itemId.c_str(), name.c_str(), info.c_str(), price, balance);
         }
-
-
-        //mCacheListItems[data->nRow] = mListItem[data->nRow];
     }
 
-
     //////******
-
-    mGoodsListView->setDelegate(this);
-    mGoodsListView->setMode(CCListViewModeVertical);
-    mGoodsListView->setSeparatorStyle(CCListViewCellSeparatorStyleNone);
-    mGoodsListView->reload();
+    mGoodsTableView->setBounceable(true);
+    mGoodsTableView->setDataSource(this);
+    mGoodsTableView->setDelegate(this);
+    mGoodsTableView->reloadData();
 
     CCSoomlaError *soomlaError = NULL;
     int balance = CCStoreInventory::sharedStoreInventory()->getItemBalance("currency_muffin", &soomlaError);
@@ -155,13 +159,15 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
 }
 
 SEL_MenuHandler StoreAScene::onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName) {
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", StoreAScene::onBack);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreMuffins", StoreAScene::onMoreMuffins);
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", StoreAScene::onBack)
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreMuffins", StoreAScene::onMoreMuffins)
 
     return NULL;
 }
 
 void StoreAScene::onMoreMuffins(CCObject *pSender) {
+    CC_UNUSED_PARAM(pSender);
+
     CCScene *s = StoreBScene::getStoreBScene();
     CCDirector::sharedDirector()->setDepthTest(true);
     CCTransitionScene *transition = CCTransitionMoveInR::create(0.8f, s);
@@ -178,32 +184,29 @@ void StoreAScene::onEnter() {
     CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
             callfuncO_selector(StoreAScene::updateGoodBalance),
             EVENT_ON_GOOD_BALANCE_CHANGED, NULL);
+    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+            callfuncO_selector(StoreAScene::onGoodEquipped),
+            EVENT_ON_GOOD_EQUIPPED, NULL);
+    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+            callfuncO_selector(StoreAScene::onGoodUnEquipped),
+            EVENT_ON_GOOD_UNEQUIPPED, NULL);
+    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+            callfuncO_selector(StoreAScene::onGoodUpgrade),
+            EVENT_ON_GOOD_UPGRADE, NULL);
 }
 
 void StoreAScene::onExit() {
     CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_CURRENCY_BALANCE_CHANGED);
     CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_GOOD_BALANCE_CHANGED);
+    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_GOOD_EQUIPPED);
+    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_GOOD_UNEQUIPPED);
+    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_GOOD_UPGRADE);
     CCLayer::onExit();
 }
 
-void StoreAScene::CCListView_cellForRow(CCListView *listView, CCListViewProtrolData *data) {
-    CC_UNUSED_PARAM(listView);
-
-    CCListViewCell *cell = mListRows[data->nRow];
-    cell->setPosition(CCPointZero);
-    cell->setOpacity(0);
-
-    cell->setSelectionColor(ccc4(0, 0, 0, 0));
-    data->cell = cell;
-}
-
-void StoreAScene::CCListView_numberOfCells(CCListView *listView, CCListViewProtrolData *data) {
-    CC_UNUSED_PARAM(listView);
-
-    data->nNumberOfRows = NUMBER_OF_ROWS;
-}
-
 void StoreAScene::onBack(CCObject *pSender) {
+    CC_UNUSED_PARAM(pSender);
+
     CCStoreController::sharedStoreController()->storeClosing();
 
     CCScene *s = MainScene::getMainScene();
@@ -211,25 +214,6 @@ void StoreAScene::onBack(CCObject *pSender) {
     CCTransitionScene *transition = CCTransitionMoveInL::create(0.8f, s);
 
     CCDirector::sharedDirector()->replaceScene(transition);
-}
-
-int StoreAScene::tagFromItemId(const char* itemId) {
-    string itemIdStr(itemId);
-    if (itemIdStr == "fruit_cake") return 1;
-    if (itemIdStr == "pavlova") return 2;
-    if (itemIdStr == "pavlova_10") return 3;
-    if (itemIdStr == "chocolate_cake") return 4;
-    if (itemIdStr == "cream_cup") return 5;
-    if (itemIdStr == "cream_cup_10") return 6;
-
-    if (itemIdStr == "show_room") return 8;
-    if (itemIdStr == "delivery_vehicle") return 9;
-
-    if (itemIdStr == "fat_cat") return 11;
-    if (itemIdStr == "happi_hippo") return 12;
-    if (itemIdStr == "funkey_monkey") return 13;
-
-    return 0;
 }
 
 string StoreAScene::itemIdFromTag(int tag) {
@@ -279,8 +263,8 @@ CCScene *StoreAScene::getGoodsStoreScene() {
 
     ccNodeLoaderLibrary->registerCCNodeLoader("StoreAScene", StoreASceneLoader::loader());
     ccNodeLoaderLibrary->registerCCNodeLoader("LevelIconWidget", LevelIconWidgetLoader::loader());
-    ccNodeLoaderLibrary->registerCCNodeLoader("CCListView", CCListViewLoader::loader());
-    ccNodeLoaderLibrary->registerCCNodeLoader("CCListViewCell", CCListViewCellLoader::loader());
+    ccNodeLoaderLibrary->registerCCNodeLoader("CCTableView", CCTableViewLoader::loader());
+    ccNodeLoaderLibrary->registerCCNodeLoader("CCTableViewCell", CCTableViewCellLoader::loader());
 
     CCBReader *ccbReader = new cocos2d::extension::CCBReader(ccNodeLoaderLibrary);
 
@@ -308,6 +292,76 @@ void StoreAScene::updateGoodBalance(CCArray *pParams) {
 }
 
 
+void StoreAScene::onGoodEquipped(soomla::CCVirtualGood *virtualGood) {
+    for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
+        string itemId = itemIdFromTag(i);
+        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
+            mListItem[i]->setEquiped(true);
+            break;
+        }
+    }
+}
+
+void StoreAScene::onGoodUnEquipped(soomla::CCVirtualGood *virtualGood) {
+    for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
+        string itemId = itemIdFromTag(i);
+        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
+            mListItem[i]->setEquiped(false);
+            break;
+        }
+    }
+}
+
+void StoreAScene::onGoodUpgrade(CCVirtualGood *virtualGood) {
+    for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
+        string itemId = itemIdFromTag(i);
+        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
+            setProgressForItem(itemId, mListItem[i]);
+            break;
+        }
+    }
+}
+
+CCTableViewCell *StoreAScene::tableCellAtIndex(CCTableView *table, unsigned int idx) {
+    CC_UNUSED_PARAM(table);
+
+    return mListRows[NUMBER_OF_ROWS - idx - 1];
+}
+
+unsigned int StoreAScene::numberOfCellsInTableView(CCTableView *table) {
+    CC_UNUSED_PARAM(table);
+
+    return NUMBER_OF_ROWS;
+}
+
+CCSize StoreAScene::tableCellSizeForIndex(CCTableView *table, unsigned int idx) {
+    CC_UNUSED_PARAM(table);
+
+    return mListRows[NUMBER_OF_ROWS - idx - 1]->getContentSize();
+}
+
+
+void StoreAScene::setProgressForItem(string &itemId, LevelIconWidget *pWidget) {
+    CCSoomlaError *soomlaError = NULL;
+    int progress = CCStoreInventory::sharedStoreInventory()->getGoodUpgradeLevel(itemId.c_str(), &soomlaError);
+    if (soomlaError) {
+        CCStoreUtils::logException("StoreAScene::setProgressForItem", soomlaError);
+        progress = 0;
+        CC_ASSERT(false);
+    }
+    pWidget->setProgress(progress);
+}
+
+void StoreAScene::setEquippedForItem(string &itemId, LevelIconWidget *pWidget) {
+    CCSoomlaError *soomlaError = NULL;
+    bool equipped = CCStoreInventory::sharedStoreInventory()->isVirtualGoodEquipped(itemId.c_str(), &soomlaError);
+    if (soomlaError) {
+        CCStoreUtils::logException("StoreAScene::setEquippedForItem", soomlaError);
+        equipped = false;
+        CC_ASSERT(false);
+    }
+    pWidget->setEquiped(equipped);
+}
 
 //Utils
 

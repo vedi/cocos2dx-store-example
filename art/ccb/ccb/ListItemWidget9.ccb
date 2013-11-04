@@ -1232,11 +1232,15 @@
 								<array>
 									<dict>
 										<key>name</key>
-										<string>visible</string>
+										<string>position</string>
 										<key>type</key>
-										<string>Check</string>
+										<string>Position</string>
 										<key>value</key>
-										<false/>
+										<array>
+											<real>2</real>
+											<real>2</real>
+											<integer>0</integer>
+										</array>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -2191,8 +2195,6 @@
 								<string>10</string>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>baseClass</key>

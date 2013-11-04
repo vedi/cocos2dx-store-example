@@ -278,7 +278,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows0</string>
 								<key>memberVarAssignmentName</key>
@@ -352,6 +352,8 @@
 										<false/>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>baseClass</key>
@@ -406,7 +408,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows1</string>
 								<key>memberVarAssignmentName</key>
@@ -534,7 +536,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows2</string>
 								<key>memberVarAssignmentName</key>
@@ -662,7 +664,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows3</string>
 								<key>memberVarAssignmentName</key>
@@ -790,7 +792,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows4</string>
 								<key>memberVarAssignmentName</key>
@@ -918,7 +920,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows5</string>
 								<key>memberVarAssignmentName</key>
@@ -1046,7 +1048,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows6</string>
 								<key>memberVarAssignmentName</key>
@@ -1174,7 +1176,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows7</string>
 								<key>memberVarAssignmentName</key>
@@ -1302,7 +1304,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows8</string>
 								<key>memberVarAssignmentName</key>
@@ -1430,7 +1432,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows9</string>
 								<key>memberVarAssignmentName</key>
@@ -1558,7 +1560,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows10</string>
 								<key>memberVarAssignmentName</key>
@@ -1686,7 +1688,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows11</string>
 								<key>memberVarAssignmentName</key>
@@ -1814,7 +1816,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows12</string>
 								<key>memberVarAssignmentName</key>
@@ -1942,7 +1944,7 @@
 									</dict>
 								</array>
 								<key>customClass</key>
-								<string>CCListViewCell</string>
+								<string>CCTableViewCell</string>
 								<key>displayName</key>
 								<string>listRows13</string>
 								<key>memberVarAssignmentName</key>
@@ -2019,11 +2021,11 @@
 							</dict>
 						</array>
 						<key>customClass</key>
-						<string>CCListView</string>
+						<string>CCTableView</string>
 						<key>displayName</key>
 						<string>mGoodsListView</string>
 						<key>memberVarAssignmentName</key>
-						<string>mGoodsListView</string>
+						<string>mGoodsTableView</string>
 						<key>memberVarAssignmentType</key>
 						<integer>1</integer>
 						<key>properties</key>
@@ -2036,7 +2038,7 @@
 								<key>value</key>
 								<array>
 									<real>50</real>
-									<real>50</real>
+									<real>85.416664123535156</real>
 									<integer>4</integer>
 								</array>
 							</dict>
@@ -2060,7 +2062,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.5</real>
+									<real>1</real>
 								</array>
 							</dict>
 							<dict>
@@ -3198,8 +3200,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

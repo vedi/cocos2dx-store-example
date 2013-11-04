@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="square-otto-1.3.2">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../extensions/cocos2dx-store/submodules/android-store/SoomlaAndroidStore/libs/square-otto-1.3.2.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>

@@ -54,14 +54,17 @@ void EventHandler::onGoodBalanceChanged(soomla::CCVirtualGood *virtualGood, int 
 
 void EventHandler::onGoodEquipped(soomla::CCEquippableVG *equippableVG) {
 	CCStoreUtils::logDebug(TAG, "GoodEquipped");
+    CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_EQUIPPED, equippableVG);
 }
 
 void EventHandler::onGoodUnEquipped(soomla::CCEquippableVG *equippableVG) {
 	CCStoreUtils::logDebug(TAG, "GoodUnEquipped");
+    CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_UNEQUIPPED, equippableVG);
 }
 
 void EventHandler::onGoodUpgrade(soomla::CCVirtualGood *virtualGood, soomla::CCUpgradeVG *upgradeVG) {
 	CCStoreUtils::logDebug(TAG, "GoodUpgrade");
+    CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_UPGRADE, virtualGood);
 }
 
 void EventHandler::onItemPurchased(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {

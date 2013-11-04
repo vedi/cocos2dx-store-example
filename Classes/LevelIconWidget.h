@@ -29,8 +29,10 @@ public:
     virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName);
     virtual void onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader);
 
-    void setData(char const *itemId, char const *name, char const *description, float price, int balance);
+    void setData(char const *itemId, char const *name, char const *description, double price, int balance);
     void setBalance(int balance);
+    void setProgress(int progress);
+    void setEquiped(bool equiped);
 
 private:
     std::string mItemId;
@@ -46,6 +48,8 @@ private:
     CCLabelTTF *mPrice;
     CCLabelTTF *mBalance;
 
+    bool mEquipable;
+    bool mEquiped;
 
     //selectors
     void onBuy(CCObject *pSender);

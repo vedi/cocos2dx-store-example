@@ -56,6 +56,9 @@ bool StoreBScene::init() {
 }
 
 void StoreBScene::onBack(CCObject* pSender) {
+
+    CC_UNUSED_PARAM(pSender);
+
     CCScene *s = StoreAScene::getGoodsStoreScene();
     CCDirector::sharedDirector()->setDepthTest(true);
     CCTransitionScene *transition = CCTransitionMoveInL::create(0.8f, s);
@@ -77,48 +80,15 @@ void StoreBScene::onBuy(CCObject* pSender) {
     }
 }
 
-string StoreBScene::productIdFromTag(int tag) {
-
-    string itemId = itemIdFromTag(tag);
-
-    if (itemId == "ERROR") {
-        string ret("no_ads");
-        return ret;
-    }
-
-    CCSoomlaError *soomlaError = NULL;
-    CCVirtualItem *virtualItem = CCStoreInfo::sharedStoreInfo()->getItemByItemId(itemId.c_str(), &soomlaError);
-    if (soomlaError) {
-        CCStoreUtils::logException("StoreBScene::productIdFromTag", soomlaError);
-        return "ERROR";
-    }
-    CC_ASSERT(virtualItem);
-    string nameS = virtualItem->getName()->getCString();
-    string infoS = virtualItem->getDescription()->getCString();
-    CCPurchasableVirtualItem *purchasableVirtualItem = dynamic_cast<CCPurchasableVirtualItem *>(virtualItem);
-    CC_ASSERT(purchasableVirtualItem);
-    CCPurchaseWithMarket *purchaseWithMarket = dynamic_cast<CCPurchaseWithMarket *>(purchasableVirtualItem->getPurchaseType());
-    CC_ASSERT(purchaseWithMarket);
-    return purchaseWithMarket->getMarketItem()->getProductId()->getCString();
-}
-
 string StoreBScene::itemIdFromTag(int tag) {
-    switch (tag)
-    {
+    switch (tag) {
         case 0: return "no_ads";
         case 1: return "muffins_10";
-            break;
         case 2: return "muffins_50";
-            break;
         case 3: return "muffins_400";
-            break;
         case 4: return "muffins_1000";
-            break;
         default: return "ERROR";
-            break;
     }
-
-    return "ERROR";
 }
 
 void StoreBScene::onEnter() {
@@ -134,6 +104,10 @@ void StoreBScene::onExit() {
 }
 
 void StoreBScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
+
+    CC_UNUSED_PARAM(pNode);
+    CC_UNUSED_PARAM(pNodeLoader);
+
     CC_ASSERT(mBackgroundNode);
     CC_ASSERT(mMainNode);
     CC_ASSERT(mTopNode);
@@ -183,21 +157,17 @@ void StoreBScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
 }
 
 SEL_MenuHandler StoreBScene::onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName) {
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBuy", StoreBScene::onBuy);
-    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", StoreBScene::onBack);
-    return NULL;
-}
-
-SEL_CCControlHandler StoreBScene::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBuy", StoreBScene::onBuy)
+    CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", StoreBScene::onBack)
     return NULL;
 }
 
 bool StoreBScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", CCNode *, mBackgroundNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode *, mMainNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", CCNode *, mTopNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", CCNode *, mBottomNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", CCLabelTTF *, mMuffinAmount);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", CCNode *, mBackgroundNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode *, mMainNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", CCNode *, mTopNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", CCNode *, mBottomNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", CCLabelTTF *, mMuffinAmount)
 
     if (strcmp(pMemberVariableName, ("mGoodTitles")) == 0) {
         mGoodTitles[pNode->getTag()] = (CCLabelTTF *) pNode;

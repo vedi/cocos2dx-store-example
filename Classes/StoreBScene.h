@@ -34,8 +34,7 @@ class StoreBScene :
     public CCBMemberVariableAssigner,
     public CCNodeLoaderListener {
 private:
-	string productIdFromTag(int tag);
-	string itemIdFromTag(int tag);
+    string itemIdFromTag(int tag);
 		
 public:
     CREATE_FUNC(StoreBScene);
@@ -53,7 +52,7 @@ public:
     virtual void onExit();
 
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName);
+    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;}
     virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode);
     virtual void onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader);
 

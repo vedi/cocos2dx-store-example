@@ -23,6 +23,9 @@
 
 #define EVENT_ON_CURRENCY_BALANCE_CHANGED "onCurrencyBalanceChanged"
 #define EVENT_ON_GOOD_BALANCE_CHANGED "onGoodBalanceChanged"
+#define EVENT_ON_GOOD_EQUIPPED "onGoodEquipped"
+#define EVENT_ON_GOOD_UNEQUIPPED "onGoodUnEquipped"
+#define EVENT_ON_GOOD_UPGRADE "onGoodUpgrade"
 
 using namespace std;
 
@@ -68,4 +71,4 @@ public:
 	virtual void onStoreControllerInitialized();
 };
 
-#endif
+#endif /* !__EventHandler__ */
