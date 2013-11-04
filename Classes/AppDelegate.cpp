@@ -16,6 +16,7 @@
 
 #include "AppDelegate.h"
 #include "CCStoreController.h"
+#include "CCStoreInventory.h"
 #include "CCSoomla.h"
 #include "MuffinRushAssets.h"
 #include "StoreAScene.h"
@@ -52,10 +53,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // Add 10,000 of each currency if the balance drops under 5,000
     // Of course, this is just for testing...
     CCArray *currencies = assets->getCurrencies();
-	for (int i = 0; i < currencies->count(); i++) {
+	CCObject *currencyObject;
+	CCARRAY_FOREACH(currencies, currencyObject) {
+		soomla::CCVirtualCurrency *vc =
+			dynamic_cast<soomla::CCVirtualCurrency *>(currencyObject);
+		soomla::CCSoomlaError *err;
 		int balance = soomla::CCStoreInventory::sharedStoreInventory()->
 			getItemBalance(vc->getItemId()->getCString(), NULL);
-		if (balance < 5000) {
+		if (balance < 1000) {
 			soomla::CCStoreInventory::sharedStoreInventory()->
 				giveItem(vc->getItemId()->getCString(), 10000, NULL);
 		}
