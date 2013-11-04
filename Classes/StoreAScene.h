@@ -93,7 +93,10 @@ public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CCTableViewLoader, loader);
 protected:
     virtual CCTableView * createCCNode(cocos2d::CCNode * pParent, cocos2d::extension::CCBReader * pCCBReader) {
-        CCTableView *pRet = CCTableView::create();
+        CCTableView *pRet = new CCTableView();
+        pRet->initWithViewSize(CCSizeZero, NULL);
+        pRet->autorelease();
+        pRet->setDataSource(NULL);
         return pRet;
     }
 };
