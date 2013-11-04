@@ -57,7 +57,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	CCARRAY_FOREACH(currencies, currencyObject) {
 		soomla::CCVirtualCurrency *vc =
 			dynamic_cast<soomla::CCVirtualCurrency *>(currencyObject);
-		soomla::CCSoomlaError *err;
 		int balance = soomla::CCStoreInventory::sharedStoreInventory()->
 			getItemBalance(vc->getItemId()->getCString(), NULL);
 		if (balance < 1000) {
