@@ -1,6 +1,6 @@
 # cocos2dx-store-example  [EXPERIMENTAL]
 
-**cocos2dx-store-example** is an example project demonstrating usage and implementation of SOOMLA's cocos2dx-store.
+**cocos2dx-store-example** is an example project demonstrating usage and implementation of SOOMLA's [cocos2dx-store](http://github.com/soomla/cocos2dx-store).
 
 This project contains examples for implementing all of SOOMLA's interfaces and using SOOMLA's various services. Read up on what you can do with SOOMLA in this [wiki](https://github.com/soomla/android-store/wiki) (the wiki is for Android but it applies to all the projects under The SOOMLA Project).
 
