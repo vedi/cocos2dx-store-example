@@ -151,16 +151,43 @@ bool MuffinRushAssets::init() {
             CCString::create(""),
             CCString::create("show_room_0"),
             CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(220)));
+	
     CCVirtualGood *showRoomGood1 = CCUpgradeVG::create(
             CCString::create("show_room"),
             CCString::create("show_room_0"),
-            NULL,
+            CCString::create("show_room_2"),
             CCString::create("Show Room L1"),
             CCString::create(""),
             CCString::create("show_room_1"),
-            CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(220))
-    );
+            CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(220)));
 
+	CCVirtualGood *showRoomGood2 = CCUpgradeVG::create(
+			CCString::create("show_room"),
+			CCString::create("show_room_1"),
+			CCString::create("show_room_3"),
+			CCString::create("Show Room L2"),
+			CCString::create(""),
+			CCString::create("show_room_2"),
+			CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(220)));
+
+	CCVirtualGood *showRoomGood3 = CCUpgradeVG::create(
+			CCString::create("show_room"),
+			CCString::create("show_room_2"),
+			CCString::create("show_room_4"),
+			CCString::create("Show Room L3"),
+			CCString::create(""),
+			CCString::create("show_room_3"),
+			CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(220)));
+
+	CCVirtualGood *showRoomGood4 = CCUpgradeVG::create(
+			CCString::create("show_room"),
+			CCString::create("show_room_3"),
+			NULL,
+			CCString::create("Show Room L4"),
+			CCString::create(""),
+			CCString::create("show_room_4"),
+			CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(220)));
+	
     CCVirtualGood *deliveryVehicleGood =
             CCLifetimeVG::create(CCString::create("Delivery Vehicle"), // name
                     CCString::create("Delivery Vehicle"), // description
@@ -179,12 +206,39 @@ bool MuffinRushAssets::init() {
     CCVirtualGood *deliveryVehicleGood1 = CCUpgradeVG::create(
             CCString::create("delivery_vehicle"),
             CCString::create("delivery_vehicle_0"),
-            NULL,
+            CCString::create("delivery_vehicle_2"),
             CCString::create("Delivery Vehicle 1"),
             CCString::create(""),
             CCString::create("delivery_vehicle_1"),
             CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(20)));
 
+    CCVirtualGood *deliveryVehicleGood2 = CCUpgradeVG::create(
+			CCString::create("delivery_vehicle"),
+			CCString::create("delivery_vehicle_1"),
+			CCString::create("delivery_vehicle_3"),
+			CCString::create("Delivery Vehicle 2"),
+			CCString::create(""),
+			CCString::create("delivery_vehicle_2"),
+			CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(20)));
+
+    CCVirtualGood *deliveryVehicleGood3 = CCUpgradeVG::create(
+			CCString::create("delivery_vehicle"),
+			CCString::create("delivery_vehicle_2"),
+			CCString::create("delivery_vehicle_4"),
+			CCString::create("Delivery Vehicle 3"),
+			CCString::create(""),
+			CCString::create("delivery_vehicle_3"),
+			CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(20)));
+
+	CCVirtualGood *deliveryVehicleGood4 = CCUpgradeVG::create(
+			CCString::create("delivery_vehicle"),
+			CCString::create("delivery_vehicle_3"),
+			NULL,
+			CCString::create("Delivery Vehicle 4"),
+			CCString::create(""),
+			CCString::create("delivery_vehicle_4"),
+			CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(20)));
+	
     CCVirtualGood *fatCatGood = CCEquippableVG::create(
             CCInteger::create(CCEquippableVG::kCategory),
             CCString::create("Fat Cat"),
@@ -208,7 +262,7 @@ bool MuffinRushAssets::init() {
 
 
     /** Virtual Categories **/
-    // The muffin rush theme doesn't support categories, so we just put everything under a general category.
+
     CCVirtualCategory *cakes = CCVirtualCategory::create(
             CCString::create("Cakes"),
             CCArray::create(
@@ -222,8 +276,17 @@ bool MuffinRushAssets::init() {
 
     CCVirtualCategory *upgrades = CCVirtualCategory::create(
             CCString::create("Upgrades"),
-            CCArray::create(CCString::create("show_room_0"), CCString::create("show_room_1"),
-                    CCString::create("delivery_vehicle_0"), CCString::create("delivery_vehicle_1"), NULL));
+            CCArray::create(CCString::create("show_room_0"),
+							CCString::create("show_room_1"),
+							CCString::create("show_room_2"),
+							CCString::create("show_room_3"),
+							CCString::create("show_room_4"),
+							CCString::create("delivery_vehicle_0"),
+							CCString::create("delivery_vehicle_1"),
+							CCString::create("delivery_vehicle_2"),
+							CCString::create("delivery_vehicle_3"),
+							CCString::create("delivery_vehicle_4"),
+							NULL));
 
     CCVirtualCategory *characters = CCVirtualCategory::create(
             CCString::create("Characters"),
@@ -245,9 +308,10 @@ bool MuffinRushAssets::init() {
     mCurrencies = CCArray::create(muffinCurrency, NULL);
     mCurrencies->retain();
 
-    mGoods = CCArray::create(muffincakeGood, pavlovaGood, tenPavlovaGoods, choclatecakeGood, creamcupGood,
-            tenCreamcupGoods, showRoomGood, showRoomGood0, showRoomGood1, deliveryVehicleGood, deliveryVehicleGood0, deliveryVehicleGood1,
-            fatCatGood, happiHippoGood, funkeyMonkeyGood, NULL);
+    mGoods = CCArray::create(muffincakeGood, pavlovaGood, tenPavlovaGoods, choclatecakeGood, creamcupGood, tenCreamcupGoods,
+							 showRoomGood, showRoomGood0, showRoomGood1, showRoomGood2, showRoomGood3, showRoomGood4,
+							 deliveryVehicleGood, deliveryVehicleGood0, deliveryVehicleGood1, deliveryVehicleGood2,
+							 deliveryVehicleGood3, deliveryVehicleGood4, fatCatGood, happiHippoGood, funkeyMonkeyGood, NULL);
     mGoods->retain();
 
     mCurrencyPacks = CCArray::create(tenmuffPack, fiftymuffPack, fourhundmuffPack, thousandmuffPack, NULL);
