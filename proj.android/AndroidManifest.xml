@@ -15,7 +15,7 @@
         android:name="com.soomla.store.SoomlaApp"
         android:debuggable="true">
 
-        <activity android:name=".ExampleStore"
+        <activity android:name=".StoreExampleActivity"
                   android:label="@string/app_name"
                   android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
