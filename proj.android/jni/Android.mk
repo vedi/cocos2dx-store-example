@@ -8,7 +8,7 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := jni_init/main.cpp \
                    ../../Classes/AppDelegate.cpp \
-                   ../../Classes/EventHandler.cpp \
+                   ../../Classes/ExampleEventHandler.cpp \
                    ../../Classes/LevelIconWidget.cpp \
                    ../../Classes/MainScene.cpp \
                    ../../Classes/MuffinRushAssets.cpp \

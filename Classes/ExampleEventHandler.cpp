@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "EventHandler.h"
+#include "ExampleEventHandler.h"
 #include "CCStoreUtils.h"
 #include "cocos2d.h"
 

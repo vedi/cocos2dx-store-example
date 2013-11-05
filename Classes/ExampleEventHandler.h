@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef __EventHandler__
-#define __EventHandler__
+#ifndef __ExampleEventHandler__
+#define __ExampleEventHandler__
 
 #include <string>
 #include "CCEventHandler.h"
@@ -68,7 +68,7 @@ public:
 
     virtual void onUnexpectedErrorInStore();
 
-	virtual void onStoreControllerInitialized();
+    virtual void onStoreControllerInitialized();
 };
 
-#endif /* !__EventHandler__ */
+#endif /* !__ExampleEventHandler__ */

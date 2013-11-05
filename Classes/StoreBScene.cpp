@@ -22,7 +22,7 @@
 #include "CCStoreInfo.h"
 #include "CCPurchaseWithMarket.h"
 #include "StoreAScene.h"
-#include "EventHandler.h"
+#include "ExampleEventHandler.h"
 
 /**
  * This is the second scene (the window where the VirtualCurrencyPacks are shown).
