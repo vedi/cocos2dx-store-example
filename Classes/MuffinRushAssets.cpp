@@ -107,7 +107,7 @@ bool MuffinRushAssets::init() {
     );
 
     CCVirtualGood *tenPavlovaGoods = CCSingleUsePackVG::create(
-            CCString::create("pavlova_10"), CCInteger::create(10),
+            CCString::create("pavlova"), CCInteger::create(10),
             CCString::create("10 Pavlova"),
             CCString::create("Gives customers a sugar rush and they call their friends"),
             CCString::create("pavlova_10"),
@@ -135,7 +135,7 @@ bool MuffinRushAssets::init() {
             CCString::create("10 Cream Cup"),
             CCString::create("Increase bakery reputation with this original pastry"),
             CCString::create("cream_cup_10"),
-            CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(10)));
+            CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(500)));
 
     CCVirtualGood *showRoomGood =
             CCLifetimeVG::create(CCString::create("Show Room"), // name
