@@ -17,6 +17,7 @@
 #include "AppDelegate.h"
 #include "CCStoreController.h"
 #include "CCStoreInventory.h"
+#include "CCStoreInfo.h"
 #include "CCSoomla.h"
 #include "MuffinRushAssets.h"
 #include "StoreAScene.h"
@@ -58,7 +59,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	 */
 
     CCArray *currencies =
-        CCStoreInfo::sharedStoreInfo()->getVirtualCurrencies();
+        soomla::CCStoreInfo::sharedStoreInfo()->getVirtualCurrencies();
 	CCObject *currencyObject;
 	CCARRAY_FOREACH(currencies, currencyObject) {
 		soomla::CCVirtualCurrency *vc =
