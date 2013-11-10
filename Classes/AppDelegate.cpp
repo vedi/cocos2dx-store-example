@@ -27,11 +27,12 @@ USING_NS_CC;
 
 AppDelegate::AppDelegate() {
 	handler = new ExampleEventHandler();
+    // Add handler to the Cocos2d-x autorelease pool
+    handler->autorelease();
 }
 
 AppDelegate::~AppDelegate() {
-	soomla::CCSoomla::sharedSoomla()->removeEventHandler(handler);
-    delete handler;
+    soomla::CCSoomla::sharedSoomla()->removeEventHandler(handler);
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
