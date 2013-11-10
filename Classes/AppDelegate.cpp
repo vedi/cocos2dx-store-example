@@ -36,20 +36,26 @@ AppDelegate::~AppDelegate()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-	soomla::CCSoomla::sharedSoomla()->setSoomSec("ExampleSoomSecret");
-	soomla::CCSoomla::sharedSoomla()->setAndroidPublicKey("ExamplePublicKey");
-	soomla::CCSoomla::sharedSoomla()->setCustomSecret("ExampleCustomSecret");
-
-	// Set Android Test Mode for debugging your store purchases on Android
-    // REMOVE THIS BEFORE YOU PUBLISH YOUR GAME!
-    soomla::CCSoomla::sharedSoomla()->setAndroidTestMode(true);
-
     // We initialize CCStoreController and the event handler before
     // we open the store.
     soomla::CCSoomla::sharedSoomla()->addEventHandler(handler);
-	
+
 	MuffinRushAssets *assets = MuffinRushAssets::create();
-	soomla::CCStoreController::createShared(assets);
+    CCDictionary *storeParams = CCDictionary::create();
+    storeParams->
+        setObject(CCString::create("ExampleSoomSecret"), "soomSec");
+    storeParams->
+        setObject(CCString::create("ExamplePublicKey"), "androidPublicKey");
+    storeParams->
+        setObject(CCString::create("ExampleCustomSecret"), "customSecret");
+    
+    // Set Android Test Mode for debugging your store purchases on Android
+    // REMOVE THIS BEFORE YOU PUBLISH YOUR GAME!
+    storeParams->
+        setObject(CCBool::create(true), "androidTestMode");
+    
+    // This is the call to initialize CCStoreController
+	soomla::CCStoreController::createShared(assets, storeParams);
 
 	/*
 	 * ** Set the amount of each currency to 10,000 if the **
@@ -58,7 +64,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	 * ** Of course, this is just for testing...           **
 	 */
 
-    CCArray *currencies =
+    CCArray *currencies =        
         soomla::CCStoreInfo::sharedStoreInfo()->getVirtualCurrencies();
 	CCObject *currencyObject;
 	CCARRAY_FOREACH(currencies, currencyObject) {
