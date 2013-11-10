@@ -21,9 +21,9 @@
 #include "ExampleEventHandler.h"
 
 class AppDelegate : private cocos2d::CCApplication {
-private:
-	EventHandler* handler;
-public:
+ private:
+    EventHandler* handler;
+ public:
     AppDelegate();
     virtual ~AppDelegate();
     virtual bool applicationDidFinishLaunching();
