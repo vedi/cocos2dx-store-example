@@ -26,7 +26,7 @@
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
-	handler = new EventHandler();
+	handler = new ExampleEventHandler();
 }
 
 AppDelegate::~AppDelegate() {

@@ -29,7 +29,7 @@
 
 using namespace std;
 
-class EventHandler : public soomla::CCEventHandler {
+class ExampleEventHandler : public soomla::CCEventHandler {
 public:
 
     virtual void onBillingNotSupported();

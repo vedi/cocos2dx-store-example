@@ -22,7 +22,7 @@
 
 class AppDelegate : private cocos2d::CCApplication {
  private:
-    EventHandler* handler;
+    ExampleEventHandler* handler;
  public:
     AppDelegate();
     virtual ~AppDelegate();
