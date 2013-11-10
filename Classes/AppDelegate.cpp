@@ -29,8 +29,7 @@ AppDelegate::AppDelegate() {
 	handler = new EventHandler();
 }
 
-AppDelegate::~AppDelegate() 
-{
+AppDelegate::~AppDelegate() {
 	soomla::CCSoomla::sharedSoomla()->removeEventHandler(handler);
     delete handler;
 }
