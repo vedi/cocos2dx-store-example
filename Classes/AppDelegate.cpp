@@ -27,8 +27,6 @@ USING_NS_CC;
 
 AppDelegate::AppDelegate() {
 	handler = new ExampleEventHandler();
-    // Add handler to the Cocos2d-x autorelease pool
-    handler->autorelease();
 }
 
 AppDelegate::~AppDelegate() {
