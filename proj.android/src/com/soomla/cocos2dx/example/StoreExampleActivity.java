@@ -23,7 +23,6 @@ THE SOFTWARE.
 ****************************************************************************/
 package com.soomla.cocos2dx.example;
 
-
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
@@ -32,11 +31,12 @@ import com.soomla.cocos2dx.store.*;
 import android.os.Bundle;
 
 public class StoreExampleActivity extends Cocos2dxActivity{
-
+    @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 	}
 
+    @Override
     public Cocos2dxGLSurfaceView onCreateView() {
     	Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
 
