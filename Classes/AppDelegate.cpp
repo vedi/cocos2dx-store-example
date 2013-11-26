@@ -46,12 +46,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         setObject(CCString::create("ExamplePublicKey"), "androidPublicKey");
     storeParams->
         setObject(CCString::create("ExampleCustomSecret"), "customSecret");
-    
-    // Set Android Test Mode for debugging your store purchases on Android
-    // REMOVE THIS BEFORE YOU PUBLISH YOUR GAME!
-    storeParams->
-        setObject(CCBool::create(true), "androidTestMode");
-    
+
     // This is the call to initialize CCStoreController
 	soomla::CCStoreController::createShared(assets, storeParams);
 
@@ -62,7 +57,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	 * ** Of course, this is just for testing...           **
 	 */
 
-    CCArray *currencies =        
+    CCArray *currencies =
         soomla::CCStoreInfo::sharedStoreInfo()->getVirtualCurrencies();
 	CCObject *currencyObject;
 	CCARRAY_FOREACH(currencies, currencyObject) {
@@ -75,7 +70,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 				giveItem(vc->getItemId()->getCString(), 10000 - balance, NULL);
 		}
 	}
-	
+
 	CCDirector::sharedDirector()->setOpenGLView(CCEGLView::sharedOpenGLView());
 	// Disable FPS counter
 	CCDirector::sharedDirector()->setDisplayStats(false);

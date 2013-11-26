@@ -42,7 +42,6 @@ public class StoreExampleActivity extends Cocos2dxActivity{
 
     	glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
 
-        StoreControllerBridge.setActivity(this);
         StoreControllerBridge.setGLView(glSurfaceView);
 
     	return glSurfaceView;

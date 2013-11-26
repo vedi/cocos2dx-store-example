@@ -25,15 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="com.soomla.billing.BillingService" />
 
-        <receiver android:name="com.soomla.billing.BillingReceiver">
-            <intent-filter>
-                <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
-                <action android:name="com.android.vending.billing.RESPONSE_CODE" />
-                <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
-            </intent-filter>
-        </receiver>
+        <activity android:name="com.soomla.store.StoreController$IabActivity"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
     </application>
     <supports-screens android:largeScreens="true"
                       android:smallScreens="true"
