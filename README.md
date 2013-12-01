@@ -48,7 +48,7 @@ Take a look around, and get a feel for all you can do with cocos2dx-store.
 
 Take a look around, and get a feel for all you can do with cocos2dx-store.
 
-#### IStoreAssets
+#### CCIStoreAssets
 
 A good example of how to define an economy model can be found in [MuffinRushAssets](https://github.com/soomla/cocos2dx-store-example/blob/master/Classes/MuffinRushAssets.cpp).
 
@@ -56,10 +56,10 @@ Take a look at that file and see how you can define your specific game's economy
 
 #### Scenes
 
-This project contains three main scenes: MainScene, StoreAScene, and StoreBScene.
+This project contains three main scenes: MainScene, StoreAScene, and StoreBScene. They are all built with [*CocosBuilder*](http://cocosbuilder.com/)
 - **MainScene**: serves as an entry point to the store, use it as a reference how to enter the store in your app.
-- **StoreAScene**: contains all of the PurchaseWithVirtualItem items and allows the user to buy them. This scene is built with CocosBuilder.
-- **StoreBScene**: contains all of the PurchaseWithMarket items and allows the user to buy them. This scene is also built with CocosBuilder.
+- **StoreAScene**: contains all of the PurchaseWithVirtualItem items and allows the user to buy them.
+- **StoreBScene**: contains all of the PurchaseWithMarket items and allows the user to buy them.
 
 ## SOOMLA, Elsewhere ...
 
