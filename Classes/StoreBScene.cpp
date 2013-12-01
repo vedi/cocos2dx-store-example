@@ -16,11 +16,7 @@
 
 #include "StoreBScene.h"
 
-#include "CCStoreController.h"
-#include "CCStoreUtils.h"
-#include "CCStoreInventory.h"
-#include "CCStoreInfo.h"
-#include "CCPurchaseWithMarket.h"
+#include "Soomla.h"
 #include "StoreAScene.h"
 #include "ExampleEventHandler.h"
 

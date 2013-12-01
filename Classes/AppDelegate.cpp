@@ -15,10 +15,7 @@
  */
 
 #include "AppDelegate.h"
-#include "CCStoreController.h"
-#include "CCStoreInventory.h"
-#include "CCStoreInfo.h"
-#include "CCSoomla.h"
+#include "Soomla.h"
 #include "MuffinRushAssets.h"
 #include "StoreAScene.h"
 #include "MainScene.h"

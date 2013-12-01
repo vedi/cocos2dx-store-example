@@ -6,8 +6,7 @@
 #include "StoreAScene.h"
 #include "MainScene.h"
 #include "StoreBScene.h"
-#include "CCPurchaseWithMarket.h"
-#include "CCPurchaseWithVirtualItem.h"
+#include "Soomla.h"
 #include "ExampleEventHandler.h"
 
 using namespace soomla;

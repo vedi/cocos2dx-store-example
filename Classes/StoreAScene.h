@@ -10,8 +10,8 @@
 #include "LevelIconWidget.h"
 
 #include "cocos2d.h"
+#include "Soomla.h"
 #include "cocos-ext.h"
-#include "SoomlaIncludes.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
