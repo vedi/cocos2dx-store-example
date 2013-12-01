@@ -1,4 +1,4 @@
-# cocos2dx-store-example  [EXPERIMENTAL]
+# cocos2dx-store-example
 
 **cocos2dx-store-example** is an example project demonstrating usage and implementation of SOOMLA's [cocos2dx-store](http://github.com/soomla/cocos2dx-store).
 
