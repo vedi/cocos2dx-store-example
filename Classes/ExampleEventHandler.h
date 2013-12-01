@@ -60,8 +60,6 @@ public:
 
     virtual void onMarketPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
 
-    virtual void onMarketRefund(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
     virtual void onRestoreTransactions(bool success);
 
     virtual void onRestoreTransactionsStarted();

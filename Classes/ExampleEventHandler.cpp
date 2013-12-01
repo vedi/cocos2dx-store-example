@@ -26,15 +26,15 @@ void ExampleEventHandler::onBillingNotSupported() {
     soomla::CCStoreUtils::logDebug(TAG, "BillingNotSupported");
 }
 
-void ExampleEventHandler::onBillingSupported() { 
+void ExampleEventHandler::onBillingSupported() {
     soomla::CCStoreUtils::logDebug(TAG, "BillingSupported");
 }
 
-void ExampleEventHandler::onOpeningStore() { 
+void ExampleEventHandler::onOpeningStore() {
     soomla::CCStoreUtils::logDebug(TAG, "OpeningStore");
 }
 
-void ExampleEventHandler::onClosingStore() { 
+void ExampleEventHandler::onClosingStore() {
     soomla::CCStoreUtils::logDebug(TAG, "ClosingStore");
 }
 
@@ -85,10 +85,6 @@ void ExampleEventHandler::onMarketPurchaseStarted(soomla::CCPurchasableVirtualIt
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseStarted");
 }
 
-void ExampleEventHandler::onMarketRefund(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
-    soomla::CCStoreUtils::logDebug(TAG, "MarketRefund");
-}
-
 void ExampleEventHandler::onRestoreTransactions(bool success) {
     soomla::CCStoreUtils::logDebug(TAG, "RestoreTransactions");
 }
@@ -101,6 +97,6 @@ void ExampleEventHandler::onUnexpectedErrorInStore() {
     soomla::CCStoreUtils::logDebug(TAG, "UnexpectedErrorInStore");
 }
 
-void ExampleEventHandler::onStoreControllerInitialized() { 
+void ExampleEventHandler::onStoreControllerInitialized() {
     soomla::CCStoreUtils::logDebug(TAG, "StoreContorllerInitialized");
 }
