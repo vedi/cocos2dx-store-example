@@ -22,76 +22,65 @@
 
 USING_NS_CC;
 
-// TODO:
 void ExampleEventHandler::onBillingNotSupported() {
     soomla::CCStoreUtils::logDebug(TAG, "BillingNotSupported");
 }
 
-void ExampleEventHandler::onBillingSupported() { // TODO:
+void ExampleEventHandler::onBillingSupported() { 
     soomla::CCStoreUtils::logDebug(TAG, "BillingSupported");
 }
 
-void ExampleEventHandler::onOpeningStore() { // TODO:
+void ExampleEventHandler::onOpeningStore() { 
     soomla::CCStoreUtils::logDebug(TAG, "OpeningStore");
 }
 
-void ExampleEventHandler::onClosingStore() { // TODO:
+void ExampleEventHandler::onClosingStore() { 
     soomla::CCStoreUtils::logDebug(TAG, "ClosingStore");
 }
 
-// TODO:
 void ExampleEventHandler::onCurrencyBalanceChanged(soomla::CCVirtualCurrency *virtualCurrency, int balance, int amountAdded) {
     soomla::CCStoreUtils::logDebug(TAG, "CurrencyBalanceChanged");
     CCNotificationCenter::sharedNotificationCenter()->postNotification
         (EVENT_ON_CURRENCY_BALANCE_CHANGED, CCInteger::create(balance));
 }
 
-// TODO:
 void ExampleEventHandler::onGoodBalanceChanged(soomla::CCVirtualGood *virtualGood, int balance, int amountAdded) {
     soomla::CCStoreUtils::logDebug(TAG, "GoodBalanceChanged");
     CCNotificationCenter::sharedNotificationCenter()->postNotification
         (EVENT_ON_GOOD_BALANCE_CHANGED, CCArray::create(virtualGood, CCInteger::create(balance), NULL));
 }
 
-// TODO:
 void ExampleEventHandler::onGoodEquipped(soomla::CCEquippableVG *equippableVG) {
     soomla::CCStoreUtils::logDebug(TAG, "GoodEquipped");
     CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_EQUIPPED, equippableVG);
 }
 
-// TODO:
 void ExampleEventHandler::onGoodUnEquipped(soomla::CCEquippableVG *equippableVG) {
     soomla::CCStoreUtils::logDebug(TAG, "GoodUnEquipped");
     CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_UNEQUIPPED, equippableVG);
 }
 
-// TODO:
 void ExampleEventHandler::onGoodUpgrade(soomla::CCVirtualGood *virtualGood, soomla::CCUpgradeVG *upgradeVG) {
     soomla::CCStoreUtils::logDebug(TAG, "GoodUpgrade");
     CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_UPGRADE, virtualGood);
 }
 
-// TODO:
 void ExampleEventHandler::onItemPurchased(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
     soomla::CCStoreUtils::logDebug(TAG, "ItemPurchased");
 }
 
-// TODO:
 void ExampleEventHandler::onItemPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
     soomla::CCStoreUtils::logDebug(TAG, "ItemPurchaseStarted");
 }
 
-// TODO:
 void ExampleEventHandler::onMarketPurchaseCancelled(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseCancelled");
 }
 
-// TODO:
 void ExampleEventHandler::onMarketPurchase(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchase");
 }
 
-// TODO:
 void ExampleEventHandler::onMarketPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseStarted");
 }
@@ -100,21 +89,18 @@ void ExampleEventHandler::onMarketRefund(soomla::CCPurchasableVirtualItem *purch
     soomla::CCStoreUtils::logDebug(TAG, "MarketRefund");
 }
 
-// TODO:
 void ExampleEventHandler::onRestoreTransactions(bool success) {
     soomla::CCStoreUtils::logDebug(TAG, "RestoreTransactions");
 }
 
-// TODO:
 void ExampleEventHandler::onRestoreTransactionsStarted() {
     soomla::CCStoreUtils::logDebug(TAG, "RestoreTransactionsStarted");
 }
 
-// TODO:
 void ExampleEventHandler::onUnexpectedErrorInStore() {
     soomla::CCStoreUtils::logDebug(TAG, "UnexpectedErrorInStore");
 }
 
-void ExampleEventHandler::onStoreControllerInitialized() { // TODO:
+void ExampleEventHandler::onStoreControllerInitialized() { 
     soomla::CCStoreUtils::logDebug(TAG, "StoreContorllerInitialized");
 }
