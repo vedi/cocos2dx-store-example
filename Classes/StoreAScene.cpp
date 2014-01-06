@@ -84,8 +84,9 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
     shiftToTop(mTopNode);
     shiftToBottom(mBottomNode);
 
-
-    CCStoreController::sharedStoreController()->storeOpening();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    CCStoreController::sharedStoreController()->startIabServiceInBg();
+#endif
 
     ////*****
     for (int i = 0; i < NUMBER_OF_ROWS; i++) {
@@ -206,7 +207,9 @@ void StoreAScene::onExit() {
 void StoreAScene::onBack(CCObject *pSender) {
     CC_UNUSED_PARAM(pSender);
 
-    CCStoreController::sharedStoreController()->storeClosing();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    CCStoreController::sharedStoreController()->stopIabServiceInBg();
+#endif
 
     CCScene *s = MainScene::getMainScene();
     CCDirector::sharedDirector()->setDepthTest(true);

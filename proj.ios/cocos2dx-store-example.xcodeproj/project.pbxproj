@@ -106,7 +106,6 @@
 		372B74BB0874C0F6750A3FF1 /* CCEquippableVG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B74307194079CE024D8BF /* CCEquippableVG.cpp */; };
 		372B74F2D18737C9A78C7D89 /* NonConsumableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 372B7F4D0EAD57FBD07EDF3D /* NonConsumableItem.m */; };
 		372B7509BE6F946437A397AB /* SoomlaNDKGlue.mm in Sources */ = {isa = PBXBuildFile; fileRef = 372B7EFE4D7E0814E59FECD2 /* SoomlaNDKGlue.mm */; };
-		372B7513F4992B83B7DFEC6A /* EventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 372B7E2083BEF352475CE714 /* EventHandler.cpp */; };
 		372B7534748F4CA83D67491C /* StoreInventoryBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 372B7A21A93C7CB9AFB8FC99 /* StoreInventoryBridge.mm */; };
 		372B753B73D13BB25806632E /* CCSoomlaNdkBridgeIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = 372B7123BDA623F5CA362E98 /* CCSoomlaNdkBridgeIos.mm */; };
 		372B754F21259273BF58ECE3 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 372B74910DAC9C63CFF61C6C /* error.c */; };
@@ -185,6 +184,8 @@
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
+		C05F2F091879D90E007C7025 /* ExampleEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C05F2F071879D90E007C7025 /* ExampleEventHandler.cpp */; };
+		C05F2F0C187AB971007C7025 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C05F2F0B187AB971007C7025 /* AdSupport.framework */; };
 		D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41A0AD0160F154A004552AE /* Default-568h@2x.png */; };
 		D446FD6E16102124000ADA7B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D446FD6D16102124000ADA7B /* Default@2x.png */; };
 		D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620B132DFF330009C878 /* OpenAL.framework */; };
@@ -378,7 +379,6 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		372B7003CA671BD4E3FE34CA /* NotEnoughGoodsException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotEnoughGoodsException.h; sourceTree = "<group>"; };
-		372B7007248402B9670D55A2 /* EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHandler.h; sourceTree = "<group>"; };
 		372B70243DBD9EC0476BE88F /* StorefrontInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorefrontInfo.m; sourceTree = "<group>"; };
 		372B7027B2BD06FD711C5F7C /* EventDispatcherBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EventDispatcherBridge.mm; sourceTree = "<group>"; };
 		372B703465961664DF7CE793 /* VirtualItemStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VirtualItemStorage.h; sourceTree = "<group>"; };
@@ -540,7 +540,6 @@
 		372B7E08D0C5647FE06BCE83 /* CCPurchaseWithMarket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCPurchaseWithMarket.cpp; sourceTree = "<group>"; };
 		372B7E0C72720BEB20A5231D /* SoomlaJSONConsts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoomlaJSONConsts.cpp; sourceTree = "<group>"; };
 		372B7E185E0C6C147225C273 /* utf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf.h; sourceTree = "<group>"; };
-		372B7E2083BEF352475CE714 /* EventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventHandler.cpp; sourceTree = "<group>"; };
 		372B7E3651246BE6D620802A /* EventHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventHandling.m; sourceTree = "<group>"; };
 		372B7E36A2C3800F184C3029 /* CCEquippableVG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEquippableVG.h; sourceTree = "<group>"; };
 		372B7EAEC0EA6BFEBAA8E2B9 /* KeyValueStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValueStorage.m; sourceTree = "<group>"; };
@@ -568,6 +567,9 @@
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C05F2F071879D90E007C7025 /* ExampleEventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExampleEventHandler.cpp; path = ../Classes/ExampleEventHandler.cpp; sourceTree = "<group>"; };
+		C05F2F081879D90E007C7025 /* ExampleEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExampleEventHandler.h; path = ../Classes/ExampleEventHandler.h; sourceTree = "<group>"; };
+		C05F2F0B187AB971007C7025 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D41A0AD0160F154A004552AE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../proj.ios/Default-568h@2x.png"; sourceTree = "<group>"; };
 		D446FD6D16102124000ADA7B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../proj.ios/Default@2x.png"; sourceTree = "<group>"; };
 		D44C620B132DFF330009C878 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -585,6 +587,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05F2F0C187AB971007C7025 /* AdSupport.framework in Frameworks */,
 				15A3DA6A1682F886002FB0C5 /* libcocos2dx.a in Frameworks */,
 				1ACB3244164770DE00914215 /* libcurl.a in Frameworks */,
 				9D91A62A17538F2000FCE86B /* libsqlite3.0.dylib in Frameworks */,
@@ -824,10 +827,10 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C05F2F071879D90E007C7025 /* ExampleEventHandler.cpp */,
+				C05F2F081879D90E007C7025 /* ExampleEventHandler.h */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
-				372B7E2083BEF352475CE714 /* EventHandler.cpp */,
-				372B7007248402B9670D55A2 /* EventHandler.h */,
 				372B717C6F4CF815A6C4A211 /* MainScene.cpp */,
 				372B74025BE92CEC353EA27E /* MainScene.h */,
 				372B7BA42FF00F91BBFA2239 /* MuffinRushAssets.cpp */,
@@ -916,6 +919,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C05F2F0B187AB971007C7025 /* AdSupport.framework */,
 				9DE21A971753902900D21B65 /* StoreKit.framework */,
 				9DE21A941753901100D21B65 /* Security.framework */,
 				9D91A62817538F0700FCE86B /* libsqlite3.0.dylib */,
@@ -1442,6 +1446,7 @@
 				1A40E7271727BF49006D4861 /* BoneData.cpp in Sources */,
 				1A40E7281727BF49006D4861 /* extension.cpp in Sources */,
 				1A40E7291727BF49006D4861 /* Json.cpp in Sources */,
+				C05F2F091879D90E007C7025 /* ExampleEventHandler.cpp in Sources */,
 				1A40E72A1727BF49006D4861 /* RegionAttachment.cpp in Sources */,
 				1A40E72B1727BF49006D4861 /* Skeleton.cpp in Sources */,
 				1A40E72C1727BF49006D4861 /* SkeletonData.cpp in Sources */,
@@ -1450,7 +1455,6 @@
 				1A40E72F1727BF49006D4861 /* Slot.cpp in Sources */,
 				1A40E7301727BF49006D4861 /* SlotData.cpp in Sources */,
 				1A40E7311727BF49006D4861 /* spine-cocos2dx.cpp in Sources */,
-				372B7513F4992B83B7DFEC6A /* EventHandler.cpp in Sources */,
 				372B7E2D6ABC12C745F40319 /* MainScene.cpp in Sources */,
 				372B794DAE649DE583ABE90E /* MuffinRushAssets.cpp in Sources */,
 				372B7A7B4575C5879BAA434F /* StoreBScene.cpp in Sources */,
@@ -1575,7 +1579,7 @@
 					"$(SRCROOT)/../../../CocosDenshion/include",
 					"\"$(SRCROOT)/../../../external/chipmunk/include/constraints\"",
 					"\"$(SRCROOT)/../../../external/chipmunk/include/chipmunk\"",
-					"\"$(SRCROOT)/../../../extensions\"",
+					"\"$(SRCROOT)/../../../extensions\"/**",
 					"\"$(SRCROOT)/../../../cocos2dx/kazmath/include\"",
 					"\"$(SRCROOT)/../../../external\"/**",
 					"\"$(SRCROOT)/../../../cocos2dx\"",
@@ -1619,7 +1623,7 @@
 					"$(SRCROOT)/../../../CocosDenshion/include",
 					"\"$(SRCROOT)/../../../external/chipmunk/include/constraints\"",
 					"\"$(SRCROOT)/../../../external/chipmunk/include/chipmunk\"",
-					"\"$(SRCROOT)/../../../extensions\"",
+					"\"$(SRCROOT)/../../../extensions\"/**",
 					"\"$(SRCROOT)/../../../cocos2dx/kazmath/include\"",
 					"\"$(SRCROOT)/../../../external\"/**",
 					"\"$(SRCROOT)/../../../cocos2dx\"",

@@ -36,10 +36,6 @@ public:
 
     virtual void onBillingSupported();
 
-    virtual void onOpeningStore();
-
-    virtual void onClosingStore();
-
     virtual void onCurrencyBalanceChanged(soomla::CCVirtualCurrency *virtualCurrency, int balance, int amountAdded);
 
     virtual void onGoodBalanceChanged(soomla::CCVirtualGood *virtualGood, int balance, int amountAdded);
@@ -67,6 +63,12 @@ public:
     virtual void onUnexpectedErrorInStore();
 
     virtual void onStoreControllerInitialized();
+	
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    virtual void onMarketRefund(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
+	virtual void onIabServiceStarted();
+	virtual void onIabServiceStopped();
+#endif
 };
 
 #endif /* !__ExampleEventHandler__ */

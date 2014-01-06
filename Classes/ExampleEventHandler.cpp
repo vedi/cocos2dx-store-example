@@ -30,14 +30,6 @@ void ExampleEventHandler::onBillingSupported() {
     soomla::CCStoreUtils::logDebug(TAG, "BillingSupported");
 }
 
-void ExampleEventHandler::onOpeningStore() {
-    soomla::CCStoreUtils::logDebug(TAG, "OpeningStore");
-}
-
-void ExampleEventHandler::onClosingStore() {
-    soomla::CCStoreUtils::logDebug(TAG, "ClosingStore");
-}
-
 void ExampleEventHandler::onCurrencyBalanceChanged(soomla::CCVirtualCurrency *virtualCurrency, int balance, int amountAdded) {
     soomla::CCStoreUtils::logDebug(TAG, "CurrencyBalanceChanged");
     CCNotificationCenter::sharedNotificationCenter()->postNotification
@@ -100,3 +92,18 @@ void ExampleEventHandler::onUnexpectedErrorInStore() {
 void ExampleEventHandler::onStoreControllerInitialized() {
     soomla::CCStoreUtils::logDebug(TAG, "StoreContorllerInitialized");
 }
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+
+void ExampleEventHandler::onMarketRefund(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
+    soomla::CCStoreUtils::logDebug(TAG, "MarketRefund");
+}
+
+void ExampleEventHandler::onIabServiceStarted() {
+    soomla::CCStoreUtils::logDebug(TAG, "IabServiceStarted");
+}
+
+void ExampleEventHandler::onIabServiceStopped() {
+    soomla::CCStoreUtils::logDebug(TAG, "IabServiceStopped");
+}
+#endif
