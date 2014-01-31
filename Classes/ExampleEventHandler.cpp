@@ -77,6 +77,10 @@ void ExampleEventHandler::onMarketPurchaseStarted(soomla::CCPurchasableVirtualIt
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseStarted");
 }
 
+void ExampleEventHandler::onMarketPurchaseVerification(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
+    soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseVerification");
+}
+
 void ExampleEventHandler::onRestoreTransactions(bool success) {
     soomla::CCStoreUtils::logDebug(TAG, "RestoreTransactions");
 }
@@ -107,3 +111,4 @@ void ExampleEventHandler::onIabServiceStopped() {
     soomla::CCStoreUtils::logDebug(TAG, "IabServiceStopped");
 }
 #endif
+
