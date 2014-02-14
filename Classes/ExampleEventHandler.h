@@ -56,6 +56,8 @@ public:
 
     virtual void onMarketPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
 
+    virtual void onMarketPurchaseVerification(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
+
     virtual void onRestoreTransactions(bool success);
 
     virtual void onRestoreTransactionsStarted();
