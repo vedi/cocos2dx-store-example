@@ -22,7 +22,7 @@ LevelIconWidget::LevelIconWidget() {
 
 }
 
-void LevelIconWidget::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
+void LevelIconWidget::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     CC_UNUSED_PARAM(pNode);
     CC_UNUSED_PARAM(pNodeLoader);
 
@@ -82,7 +82,7 @@ bool LevelIconWidget::onAssignCCBMemberVariable(CCObject *pTarget, char const *p
     return false;
 }
 
-SEL_CCControlHandler LevelIconWidget::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
+cocos2d::extension::Control::Handler LevelIconWidget::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
     CC_UNUSED_PARAM(pTarget);
     CC_UNUSED_PARAM(pSelectorName);
 

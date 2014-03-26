@@ -20,9 +20,11 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 #include <string>
+#include "cocosbuilder/CocosBuilder.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
+using namespace cocosbuilder;
 
 using namespace std;
 
@@ -32,7 +34,7 @@ class StoreBScene :
     public CCLayer,
     public CCBSelectorResolver,
     public CCBMemberVariableAssigner,
-    public CCNodeLoaderListener {
+    public NodeLoaderListener {
 private:
     string itemIdFromTag(int tag);
 		
@@ -52,11 +54,13 @@ public:
     virtual void onExit();
 
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;}
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;}
     virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode);
-    virtual void onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader);
+    virtual void onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader);
 
-    virtual void updateCurrencyBalance(CCInteger *pBalance);
+    virtual void updateCurrencyBalance(Ref *pBalance);
+
+    virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event) override;
 private:
     CCNode* mBackgroundNode;
     CCNode* mMainNode;
@@ -75,16 +79,9 @@ private:
     // a selector callback
 	void onBack(CCObject* pSender);
 	void onBuy(CCObject* pSender);
-
-	// The back key clicked
-    virtual void keyBackClicked()
-	{
-        onBack(NULL);
-	}
-    
 };
 
-class StoreBSceneLoader: public cocos2d::extension::CCLayerLoader {
+class StoreBSceneLoader: public LayerLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(StoreBSceneLoader, loader);
     CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(StoreBScene);

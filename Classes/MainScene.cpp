@@ -27,11 +27,11 @@ USING_NS_CC;
 #define SEL_GROUP "soomlaCallback"
 
 CCScene* MainScene::getMainScene() {
-    CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
+    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 
     ccNodeLoaderLibrary->registerCCNodeLoader("MainScene", MainSceneLoader::loader());
 
-    CCBReader *ccbReader = new cocos2d::extension::CCBReader(ccNodeLoaderLibrary);
+    CCBReader *ccbReader = new CCBReader(ccNodeLoaderLibrary);
 
     return ccbReader->createSceneWithNodeGraphFromFile("ccb/MainScreen.ccbi");
 }
@@ -40,7 +40,7 @@ SEL_MenuHandler MainScene::onResolveCCBCCMenuItemSelector(CCObject *pTarget, cha
     return NULL;
 }
 
-SEL_CCControlHandler MainScene::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
+cocos2d::extension::Control::Handler MainScene::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
     return NULL;
 }
 
@@ -52,7 +52,7 @@ bool MainScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMember
     return false;
 }
 
-void MainScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
+void MainScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     CC_ASSERT(mBackgroundNode);
     CC_ASSERT(mMainNode);
     CC_ASSERT(mUnlockArea);
@@ -64,44 +64,47 @@ void MainScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
     this->setKeypadEnabled(true);
 }
 
-bool MainScene::ccTouchBegan(CCTouch* touch, CCEvent* event)
-{
-    mOriginalPos = mUnlocker->getPosition();
-    return true;
-}
-
-void MainScene::ccTouchMoved(CCTouch* touch, CCEvent* event)
-{
-    CCPoint touchPoint = touch->getLocation();
-    mUnlocker->setPosition(mUnlocker->getParent()->convertToNodeSpace(touchPoint));
-}
-
-void MainScene::ccTouchEnded(CCTouch* touch, CCEvent* event)
-{
-    CCRect rect1 = mUnlocker->boundingBox();
-	CCRect rect2 = mUnlockArea->boundingBox();
-
-	if (rect1.intersectsRect(rect2)) {
-        CCScene *s = StoreAScene::getGoodsStoreScene();
-        CCDirector::sharedDirector()->setDepthTest(true);
-        CCTransitionScene *transition = CCTransitionMoveInR::create(0.8f, s);
-
-        CCDirector::sharedDirector()->replaceScene(transition);
-    }
-	else {
-        // Snap
-        mUnlocker->runAction(CCMoveTo::create(0.2f, mOriginalPos));
-    }
-}
-
 void MainScene::onEnter() {
-    CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, 0, true);
+    listener = EventListenerTouchOneByOne::create();
+    listener->onTouchBegan = [this](CCTouch* touch, CCEvent* event) {
+        this->mOriginalPos = this->mUnlocker->getPosition();
+        return true;
+    };
+    listener->onTouchMoved = [this](CCTouch* touch, CCEvent* event) {
+        CCPoint touchPoint = touch->getLocation();
+        this->mUnlocker->setPosition(this->mUnlocker->getParent()->convertToNodeSpace(touchPoint));
+    };
+    listener->onTouchEnded = [this](CCTouch* touch, CCEvent* event) {
+        CCRect rect1 = this->mUnlocker->boundingBox();
+        CCRect rect2 = this->mUnlockArea->boundingBox();
+
+        if (rect1.intersectsRect(rect2)) {
+            CCScene *s = StoreAScene::getGoodsStoreScene();
+            CCDirector::sharedDirector()->setDepthTest(true);
+            CCTransitionScene *transition = CCTransitionMoveInR::create(0.8f, s);
+
+            CCDirector::sharedDirector()->replaceScene(transition);
+        }
+        else {
+            // Snap
+            this->mUnlocker->runAction(CCMoveTo::create(0.2f, this->mOriginalPos));
+        }
+    };
+
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
     CCLayer::onEnter();
 }
 
 void MainScene::onExit() {
-    CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
+    _eventDispatcher->removeEventListener(listener);
 
     CCLayer::onExit();
+}
+
+void MainScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event) {
+    Layer::onKeyReleased(keyCode, event);
+    if (keyCode == EventKeyboard::KeyCode::KEY_BACKSPACE) {
+        CCDirector::sharedDirector()->end();
+    }
 }
