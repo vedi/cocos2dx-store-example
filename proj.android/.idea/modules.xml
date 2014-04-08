@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../extensions/cocos2dx-store/submodules/android-store/SoomlaAndroidStore/SoomlaAndroidStore.iml" filepath="$PROJECT_DIR$/../../../extensions/cocos2dx-store/submodules/android-store/SoomlaAndroidStore/SoomlaAndroidStore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../extensions/cocos2dx-store/android/android.iml" filepath="$PROJECT_DIR$/../../../extensions/cocos2dx-store/android/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../extensions/cocos2dx-store/submodules/android-store/submodules/android-store-google-play/android-store-google-play.iml" filepath="$PROJECT_DIR$/../../../extensions/cocos2dx-store/submodules/android-store/submodules/android-store-google-play/android-store-google-play.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../cocos2dx/platform/android/java/java.iml" filepath="$PROJECT_DIR$/../../../cocos2dx/platform/android/java/java.iml" />
       <module fileurl="file://$PROJECT_DIR$/proj.android.iml" filepath="$PROJECT_DIR$/proj.android.iml" />
     </modules>
   </component>
