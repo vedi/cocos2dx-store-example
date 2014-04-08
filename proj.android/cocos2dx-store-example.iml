@@ -14,8 +14,8 @@
     <orderEntry type="jdk" jdkName="Android 4.3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="SoomlaAndroidStore" />
-    <orderEntry type="module" module-name="android" />
-    <orderEntry type="module" module-name="java" />
+    <orderEntry type="module" module-name="cocos2dx-store" />
+    <orderEntry type="module" module-name="cocos2dx" />
   </component>
 </module>
 
