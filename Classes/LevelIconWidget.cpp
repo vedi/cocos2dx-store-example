@@ -22,7 +22,7 @@ LevelIconWidget::LevelIconWidget() {
 
 }
 
-void LevelIconWidget::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
+void LevelIconWidget::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     CC_UNUSED_PARAM(pNode);
     CC_UNUSED_PARAM(pNodeLoader);
 
@@ -68,21 +68,21 @@ void LevelIconWidget::setEquiped(bool equiped) {
 }
 
 bool LevelIconWidget::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoodsTitle", CCLabelTTF*, mGoodsTitle)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDescriptionLabel", CCLabelTTF*, mDescriptionLabel)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoodsTitle", Label*, mGoodsTitle)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mDescriptionLabel", Label*, mDescriptionLabel)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mProgressBar", CCSprite*, mProgressBar)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mProgressLevel1", CCSprite*, mProgressLevel1)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMenu", CCNode*, mMenu)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonBuy", CCMenuItemImage*, mButtonBuy)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonUpgrade", CCMenuItemImage*, mButtonUpgrade)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mEquipment", CCMenuItemImage*, mEquipment)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPrice", CCLabelTTF*, mPrice)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBalance", CCLabelTTF*, mBalance)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mPrice", Label*, mPrice)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBalance", Label*, mBalance)
 
     return false;
 }
 
-SEL_CCControlHandler LevelIconWidget::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
+cocos2d::extension::Control::Handler LevelIconWidget::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
     CC_UNUSED_PARAM(pTarget);
     CC_UNUSED_PARAM(pSelectorName);
 

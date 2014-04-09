@@ -40,10 +40,10 @@ bool StoreAScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemb
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackground", CCLayerColor*, mBackground)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode*, mMainNode)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", CCNode*, mTopNode)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", CCLabelTTF*, mMuffinAmount)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoodsTableView", CCTableView*, mGoodsTableView)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", Label*, mMuffinAmount)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoodsTableView", TableView*, mGoodsTableView)
     if(strcmp(pMemberVariableName, "mListRows") == 0) {
-        mListRows[pNode->getTag()] = static_cast<CCTableViewCell*>(pNode);
+        mListRows[pNode->getTag()] = static_cast<TableViewCell*>(pNode);
         return true;
     } else if(strcmp(pMemberVariableName, "mListItem") == 0) {
         mListItem[pNode->getTag()] = dynamic_cast<LevelIconWidget*>(pNode);
@@ -56,7 +56,7 @@ bool StoreAScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemb
     return false;
 }
 
-void StoreAScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
+void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     CC_UNUSED_PARAM(pNode);
     CC_UNUSED_PARAM(pNodeLoader);
 
@@ -261,27 +261,27 @@ string StoreAScene::itemIdFromTag(int tag) {
 }
 
 CCScene *StoreAScene::getGoodsStoreScene() {
-    CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
+    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 
     ccNodeLoaderLibrary->registerCCNodeLoader("StoreAScene", StoreASceneLoader::loader());
     ccNodeLoaderLibrary->registerCCNodeLoader("LevelIconWidget", LevelIconWidgetLoader::loader());
     ccNodeLoaderLibrary->registerCCNodeLoader("CCTableView", CCTableViewLoader::loader());
     ccNodeLoaderLibrary->registerCCNodeLoader("CCTableViewCell", CCTableViewCellLoader::loader());
 
-    CCBReader *ccbReader = new cocos2d::extension::CCBReader(ccNodeLoaderLibrary);
+    CCBReader *ccbReader = new CCBReader(ccNodeLoaderLibrary);
 
     return ccbReader->createSceneWithNodeGraphFromFile("ccb/StoreAScene.ccbi");
 }
 
-void StoreAScene::updateCurrencyBalance(CCInteger *pBalance) {
+void StoreAScene::updateCurrencyBalance(Ref *pBalance) {
     char buf[20] = "/0";
-    sprintf(buf, "%i", pBalance->getValue());
+    sprintf(buf, "%i", ((CCInteger*)pBalance)->getValue());
     mMuffinAmount->setString(buf);
 }
 
-void StoreAScene::updateGoodBalance(CCArray *pParams) {
-    soomla::CCVirtualGood *virtualGood = (CCVirtualGood *) pParams->objectAtIndex(0);
-    CCInteger *balance = (CCInteger *) pParams->objectAtIndex(1);
+void StoreAScene::updateGoodBalance(Ref *pParams) {
+    soomla::CCVirtualGood *virtualGood = (CCVirtualGood *) ((CCArray*)pParams)->objectAtIndex(0);
+    CCInteger *balance = (CCInteger *) ((CCArray*)pParams)->objectAtIndex(1);
 
     ////*****
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
@@ -294,54 +294,53 @@ void StoreAScene::updateGoodBalance(CCArray *pParams) {
 }
 
 
-void StoreAScene::onGoodEquipped(soomla::CCVirtualGood *virtualGood) {
+void StoreAScene::onGoodEquipped(Ref *virtualGood) {
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
         string itemId = itemIdFromTag(i);
-        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
+        if (((soomla::CCVirtualGood *)virtualGood)->getItemId()->compare(itemId.c_str()) == 0) {
             mListItem[i]->setEquiped(true);
             break;
         }
     }
 }
 
-void StoreAScene::onGoodUnEquipped(soomla::CCVirtualGood *virtualGood) {
+void StoreAScene::onGoodUnEquipped(Ref *virtualGood) {
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
         string itemId = itemIdFromTag(i);
-        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
+        if (((soomla::CCVirtualGood *)virtualGood)->getItemId()->compare(itemId.c_str()) == 0) {
             mListItem[i]->setEquiped(false);
             break;
         }
     }
 }
 
-void StoreAScene::onGoodUpgrade(CCVirtualGood *virtualGood) {
+void StoreAScene::onGoodUpgrade(Ref *virtualGood) {
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
         string itemId = itemIdFromTag(i);
-        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
+        if (((CCVirtualGood *)virtualGood)->getItemId()->compare(itemId.c_str()) == 0) {
             setProgressForItem(itemId, mListItem[i]);
             break;
         }
     }
 }
 
-CCTableViewCell *StoreAScene::tableCellAtIndex(CCTableView *table, unsigned int idx) {
+TableViewCell* StoreAScene::tableCellAtIndex(TableView *table, ssize_t idx) {
     CC_UNUSED_PARAM(table);
 
     return mListRows[NUMBER_OF_ROWS - idx - 1];
 }
 
-unsigned int StoreAScene::numberOfCellsInTableView(CCTableView *table) {
+ssize_t StoreAScene::numberOfCellsInTableView(TableView *table) {
     CC_UNUSED_PARAM(table);
 
     return NUMBER_OF_ROWS;
 }
 
-CCSize StoreAScene::tableCellSizeForIndex(CCTableView *table, unsigned int idx) {
+CCSize StoreAScene::tableCellSizeForIndex(TableView *table, ssize_t idx) {
     CC_UNUSED_PARAM(table);
 
     return mListRows[NUMBER_OF_ROWS - idx - 1]->getContentSize();
 }
-
 
 void StoreAScene::setProgressForItem(string &itemId, LevelIconWidget *pWidget) {
     CCSoomlaError *soomlaError = NULL;
@@ -439,4 +438,3 @@ void putToCenterMiddleOf(cocos2d::CCNode* targetNode, cocos2d::CCNode* anchorNod
 
     targetNode->setPosition(targetNode->getParent()->convertToNodeSpace(globalPosition));
 }
-

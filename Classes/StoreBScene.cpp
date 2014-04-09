@@ -29,7 +29,7 @@ USING_NS_CC;
 using namespace soomla;
 
 CCScene* StoreBScene::getStoreBScene() {
-    CCNodeLoaderLibrary * ccNodeLoaderLibrary = CCNodeLoaderLibrary::sharedCCNodeLoaderLibrary();
+    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::sharedNodeLoaderLibrary();
 
     ccNodeLoaderLibrary->registerCCNodeLoader("StoreBScene", StoreBSceneLoader::loader());
 
@@ -99,7 +99,7 @@ void StoreBScene::onExit() {
     CCLayer::onExit();
 }
 
-void StoreBScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
+void StoreBScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
 
     CC_UNUSED_PARAM(pNode);
     CC_UNUSED_PARAM(pNodeLoader);
@@ -117,7 +117,7 @@ void StoreBScene::onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader) {
 
         CCSoomlaError *soomlaError = NULL;
         CCVirtualItem *virtualItem = CCStoreInfo::sharedStoreInfo()->getItemByItemId(
-                mGoodTitles[i]->getString(), &soomlaError);
+                mGoodTitles[i]->getString().c_str(), &soomlaError);
         if (soomlaError) {
             CCStoreUtils::logException("StoreBScene", soomlaError);
             continue;
@@ -163,29 +163,34 @@ bool StoreBScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemb
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode *, mMainNode)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", CCNode *, mTopNode)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", CCNode *, mBottomNode)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", CCLabelTTF *, mMuffinAmount)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", Label *, mMuffinAmount)
 
     if (strcmp(pMemberVariableName, ("mGoodTitles")) == 0) {
-        mGoodTitles[pNode->getTag()] = (CCLabelTTF *) pNode;
+        mGoodTitles[pNode->getTag()] = (Label *) pNode;
         return true;
     }
     if (strcmp(pMemberVariableName, ("mGoodDescriptions")) == 0) {
-        mGoodDescriptions[pNode->getTag()] = (CCLabelTTF *) pNode;
+        mGoodDescriptions[pNode->getTag()] = (Label *) pNode;
         return true;
     }
     if (strcmp(pMemberVariableName, ("mPrices")) == 0) {
-        mPrices[pNode->getTag()] = (CCLabelTTF *) pNode;
+        mPrices[pNode->getTag()] = (Label *) pNode;
         return true;
     }
 
     return false;
 }
 
-void StoreBScene::updateCurrencyBalance(CCInteger *pBalance) {
+void StoreBScene::updateCurrencyBalance(Ref *pBalance) {
     char buf[20] = "/0";
-    sprintf(buf, "%i", pBalance->getValue());
+    sprintf(buf, "%i", ((CCInteger *)pBalance)->getValue());
     mMuffinAmount->setString(buf);
 }
 
 
-
+void StoreBScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event) {
+    Layer::onKeyReleased(keyCode, event);
+    if (keyCode == EventKeyboard::KeyCode::KEY_BACKSPACE) {
+        onBack(NULL);
+    }
+}

@@ -69,7 +69,7 @@ void ExampleEventHandler::onMarketPurchaseCancelled(soomla::CCPurchasableVirtual
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseCancelled");
 }
 
-void ExampleEventHandler::onMarketPurchase(soomla::CCPurchasableVirtualItem * purchasableVirtualItem, CCString * receiptUrl) {
+void ExampleEventHandler::onMarketPurchase(soomla::CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::CCString *receiptUrl) {
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchase");
 }
 
@@ -81,12 +81,12 @@ void ExampleEventHandler::onMarketPurchaseVerification(soomla::CCPurchasableVirt
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseVerification");
 }
 
-void ExampleEventHandler::onRestoreTransactionsFinished(bool success) {
-    soomla::CCStoreUtils::logDebug(TAG, "RestoreTransactions");
-}
-
 void ExampleEventHandler::onRestoreTransactionsStarted() {
     soomla::CCStoreUtils::logDebug(TAG, "RestoreTransactionsStarted");
+}
+
+void ExampleEventHandler::onRestoreTransactionsFinished(bool success) {
+    soomla::CCStoreUtils::logDebug(TAG, "RestoreTransactionsFinished");
 }
 
 void ExampleEventHandler::onUnexpectedErrorInStore() {
@@ -98,7 +98,7 @@ void ExampleEventHandler::onStoreControllerInitialized() {
 }
 
 void ExampleEventHandler::onMarketItemsRefreshed() {
-
+    soomla::CCStoreUtils::logDebug(TAG, "MarketItemsRefreshed");
 }
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -115,3 +115,4 @@ void ExampleEventHandler::onIabServiceStopped() {
     soomla::CCStoreUtils::logDebug(TAG, "IabServiceStopped");
 }
 #endif
+

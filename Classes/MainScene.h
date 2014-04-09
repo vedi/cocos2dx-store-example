@@ -18,23 +18,23 @@
 #define __MAIN_SCENE_H__
 
 #include "cocos2d.h"
-#include "cocos-ext.h"
+#include "cocosbuilder/CocosBuilder.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 
-class Soomla : public CCSprite, public CCTargetedTouchDelegate {
+using namespace cocosbuilder;
+
+class Soomla : public CCSprite {
 public:
-
     CREATE_FUNC(Soomla);
-
 };
 
 class MainScene:
     public cocos2d::CCLayer,
-    public cocos2d::extension::CCBSelectorResolver,
-    public cocos2d::extension::CCBMemberVariableAssigner,
-    public cocos2d::extension::CCNodeLoaderListener {
+    public CCBSelectorResolver,
+    public CCBMemberVariableAssigner,
+    public NodeLoaderListener {
 private:
     CCPoint mOriginalPos;
 private:
@@ -42,6 +42,7 @@ private:
 	CCNode* mMainNode;
 	CCNode* mUnlockArea;
 	CCNode* mUnlocker;
+    EventListenerTouchOneByOne * listener;
 public:
     CREATE_FUNC(MainScene);
 
@@ -53,26 +54,17 @@ public:
     {}
     static cocos2d::CCScene* getMainScene();
 
-	// The back key clicked
-    virtual void keyBackClicked()
-	{
-		CCDirector::sharedDirector()->end();
-	}
-
-    virtual bool ccTouchBegan(CCTouch* touch, CCEvent* event);
-    virtual void ccTouchMoved(CCTouch* touch, CCEvent* event);
-    virtual void ccTouchEnded(CCTouch* touch, CCEvent* event);
-
     virtual void onEnter();
     virtual void onExit();
 
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName);
     virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode);
-    virtual void onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader);
+    virtual void onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader);
+    virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event) override;
 };
 
-class MainSceneLoader: public cocos2d::extension::CCLayerLoader {
+class MainSceneLoader: public LayerLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(MainSceneLoader, loader);
     CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(MainScene);

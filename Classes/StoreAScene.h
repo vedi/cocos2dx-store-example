@@ -11,19 +11,21 @@
 
 #include "cocos2d.h"
 #include "Soomla.h"
-#include "cocos-ext.h"
+#include "extensions/cocos-ext.h"
+#include "cocosbuilder/CocosBuilder.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
+using namespace cocosbuilder;
 
 #define NUMBER_OF_ROWS 14
 
 class StoreAScene : public CCLayer,
                         public CCBSelectorResolver,
                         public CCBMemberVariableAssigner,
-                        public CCNodeLoaderListener,
-                        public CCTableViewDataSource,
-                        public CCTableViewDelegate
+                        public NodeLoaderListener,
+                        public TableViewDataSource,
+                        public TableViewDelegate
 {
 public:
     static CCScene* getGoodsStoreScene();
@@ -35,28 +37,28 @@ protected:
     StoreAScene();
 
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;};
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;};
     virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode);
-    virtual void onNodeLoaded(CCNode *pNode, CCNodeLoader *pNodeLoader);
+    virtual void onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader);
 
     virtual void onEnter();
     virtual void onExit();
 
 private:
-    virtual void updateCurrencyBalance(CCInteger *pBalance);
-    virtual void updateGoodBalance(CCArray *pParams);
-    virtual void onGoodEquipped(soomla::CCVirtualGood *virtualGood);
-    virtual void onGoodUnEquipped(soomla::CCVirtualGood *virtualGood);
-    virtual void onGoodUpgrade(soomla::CCVirtualGood *virtualGood);
+    virtual void updateCurrencyBalance(Ref *pBalance);
+    virtual void updateGoodBalance(Ref *pParams);
+    virtual void onGoodEquipped(Ref *virtualGood);
+    virtual void onGoodUnEquipped(Ref *virtualGood);
+    virtual void onGoodUpgrade(Ref *virtualGood);
 
     //ccb
     CCNode *mBackgroundNode;
     CCLayerColor *mBackground;
     CCNode *mMainNode;
     CCNode *mTopNode;
-    CCLabelTTF *mMuffinAmount;
-    CCTableView *mGoodsTableView;
-    CCTableViewCell *mListRows[NUMBER_OF_ROWS];
+    Label *mMuffinAmount;
+    TableView *mGoodsTableView;
+    TableViewCell *mListRows[NUMBER_OF_ROWS];
     LevelIconWidget *mListItem[NUMBER_OF_ROWS];
     CCNode *mBottomNode;
     CCMenuItemImage *mButtonBack;
@@ -71,29 +73,30 @@ private:
 
     std::basic_string<char> itemIdFromTag(int tag);
 
-    virtual CCTableViewCell *tableCellAtIndex(CCTableView *table, unsigned int idx);
-    virtual unsigned int numberOfCellsInTableView(CCTableView *table);
-    virtual CCSize tableCellSizeForIndex(CCTableView *table, unsigned int idx);
-    virtual void tableCellTouched(CCTableView *table, CCTableViewCell *cell) {}
-    virtual void scrollViewDidScroll(CCScrollView *view) {};
-    virtual void scrollViewDidZoom(CCScrollView *view) {};
+    virtual TableViewCell* tableCellAtIndex(TableView *table, ssize_t idx);
+    virtual ssize_t numberOfCellsInTableView(TableView *table);
+    virtual CCSize tableCellSizeForIndex(TableView *table, ssize_t idx) override;
+public:
+    virtual void tableCellTouched(TableView *table, TableViewCell *cell) {}
+    virtual void scrollViewDidScroll(ScrollView *view) {};
+    virtual void scrollViewDidZoom(ScrollView *view) {};
 
     void setProgressForItem(std::string &itemId, LevelIconWidget *pWidget);
     void setEquippedForItem(std::string &itemId, LevelIconWidget *pWidget);
 };
 
-class StoreASceneLoader : public cocos2d::extension::CCLayerLoader {
+class StoreASceneLoader : public LayerLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(StoreASceneLoader, loader);
     CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(StoreAScene);
 };
 
-class CCTableViewLoader : public CCScrollViewLoader {
+class CCTableViewLoader : public ScrollViewLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CCTableViewLoader, loader);
 protected:
-    virtual CCTableView * createCCNode(cocos2d::CCNode * pParent, cocos2d::extension::CCBReader * pCCBReader) {
-        CCTableView *pRet = new CCTableView();
+    virtual TableView * createNode(cocos2d::CCNode * pParent, CCBReader * pCCBReader) {
+        TableView *pRet = new TableView();
         pRet->initWithViewSize(CCSizeZero, NULL);
         pRet->autorelease();
         pRet->setDataSource(NULL);
@@ -101,13 +104,12 @@ protected:
     }
 };
 
-class CCTableViewCellLoader : public CCNodeLoader {
+class CCTableViewCellLoader : public NodeLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CCTableViewCellLoader, loader);
 protected:
-    virtual CCTableViewCell * createCCNode(cocos2d::CCNode * pParent, cocos2d::extension::CCBReader * pCCBReader) {
-        CCTableViewCell *pRet = new CCTableViewCell();
-        pRet->init();
+    virtual TableViewCell * createNode(cocos2d::CCNode * pParent, CCBReader * pCCBReader) {
+        TableViewCell *pRet = new TableViewCell();
         pRet->autorelease();
         return pRet;
     }

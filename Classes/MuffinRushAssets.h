@@ -10,11 +10,11 @@
 #include "cocos2d.h"
 
 class MuffinRushAssets: public soomla::CCIStoreAssets {
-    cocos2d::CCArray *mCurrencies;
-    cocos2d::CCArray *mGoods;
-    cocos2d::CCArray *mCurrencyPacks;
-    cocos2d::CCArray *mCategories;
-    cocos2d::CCArray *mNonConsumableItems;
+    cocos2d::Array *mCurrencies;
+    cocos2d::Array *mGoods;
+    cocos2d::Array *mCurrencyPacks;
+    cocos2d::Array *mCategories;
+    cocos2d::Array *mNonConsumableItems;
 public:
     MuffinRushAssets():
     mCurrencies(NULL),

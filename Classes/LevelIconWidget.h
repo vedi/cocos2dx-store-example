@@ -7,17 +7,18 @@
 #define __LevelIconWidget_H_
 
 #include "cocos2d.h"
-#include "cocos-ext.h"
+#include "cocosbuilder/CocosBuilder.h"
 
 
 USING_NS_CC;
 USING_NS_CC_EXT;
+using namespace cocosbuilder;
 
 
 class LevelIconWidget: public CCNode,
                        public CCBSelectorResolver,
                        public CCBMemberVariableAssigner,
-                       public CCNodeLoaderListener {
+                       public NodeLoaderListener {
 public:
 
     CREATE_FUNC(LevelIconWidget);
@@ -26,8 +27,8 @@ public:
 
     virtual bool onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode);
     virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual SEL_CCControlHandler onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName);
-    virtual void onNodeLoaded(CCNode * pNode, CCNodeLoader * pNodeLoader);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName);
+    virtual void onNodeLoaded(CCNode * pNode, NodeLoader * pNodeLoader);
 
     void setData(char const *itemId, char const *name, char const *description, double price, int balance);
     void setBalance(int balance);
@@ -37,16 +38,16 @@ public:
 private:
     std::string mItemId;
 private:
-    CCLabelTTF *mGoodsTitle;
-    CCLabelTTF *mDescriptionLabel;
+    Label *mGoodsTitle;
+    Label *mDescriptionLabel;
     CCSprite *mProgressBar;
     CCSprite *mProgressLevel1;
     CCNode *mMenu;
     CCMenuItemImage *mButtonBuy;
     CCMenuItemImage *mButtonUpgrade;
     CCMenuItemImage *mEquipment;
-    CCLabelTTF *mPrice;
-    CCLabelTTF *mBalance;
+    Label *mPrice;
+    Label *mBalance;
 
     bool mEquipable;
     bool mEquiped;
@@ -58,7 +59,7 @@ private:
 };
 
 
-class LevelIconWidgetLoader : public cocos2d::extension::CCNodeLoader {
+class LevelIconWidgetLoader : public NodeLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(LevelIconWidgetLoader, loader);
     CCB_VIRTUAL_NEW_AUTORELEASE_CREATECCNODE_METHOD(LevelIconWidget);

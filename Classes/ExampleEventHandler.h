@@ -58,9 +58,9 @@ public:
 
     virtual void onMarketPurchaseVerification(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
 
-    virtual void onRestoreTransactionsFinished(bool success);
-
     virtual void onRestoreTransactionsStarted();
+
+    virtual void onRestoreTransactionsFinished(bool success);
 
     virtual void onUnexpectedErrorInStore();
 
@@ -73,7 +73,6 @@ public:
 	virtual void onIabServiceStarted();
 	virtual void onIabServiceStopped();
 #endif
-
 };
 
 #endif /* !__ExampleEventHandler__ */
