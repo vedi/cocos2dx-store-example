@@ -6,7 +6,9 @@ This project contains examples for implementing all of SOOMLA's interfaces and u
 
 ## Getting started
 
-1. Obtain the Cocos2d-x framework either from [git](https://github.com/cocos2d/cocos2d-x) or from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure to use the latest **stable** version (v2.2 as of Oct 25 2013).
+While the 3rd version of cocos2d-x is not stable, we put all related code to branch: `cocos2dx-v3`. Please, consider to check out to this branch in example project, and in cocos2dx-store.
+
+1. Obtain the Cocos2d-x framework either from [git](https://github.com/cocos2d/cocos2d-x) or from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure to use the latest stable 3rd version of cocos2d-x (we tested with v3.0rc1).
     ```
     $ git clone git@github.com:cocos2d/cocos2d-x.git
     ```
@@ -27,23 +29,25 @@ This project contains examples for implementing all of SOOMLA's interfaces and u
     $ git clone git@github.com:soomla/cocos2dx-store-example.git projects/cocos2dx-store-example
     ```
 
+Note: Draw your attention, we use symlink to cocos2d-x in our example project. It relies on cocos2d-x availability in relative path. If you want to use the project from other location, update the symlink, or completely replace it with cocos2d-x folder.
+
 #### Build instructions for Android
 
 1. Run the `build_native.sh` script located in projects/cocos2dx-store-example/proj.android. This step should take a while.
     ```
     $ cd projects/cocos2dx-store-example/proj.android
-    $ ./build_native.sh
+    $ ./build_native.py
     ```
 
 2. Finally, open the `proj.android` directory located in `cocos2dx-store-example` in Android Studio (IntelliJ IDEA). `proj.android` is an Android Studio project.
-3. Build the project, run ExampleActivity, and you're ready to go! The application should launch in an emulator or on your device.
+3. Build the project, run example activity, and you're ready to go! The application should launch in an emulator or on your device.
 
 Take a look around, and get a feel for all you can do with cocos2dx-store.
 
 
 #### Build instructions for iOS
 
-1. Open the XCode project under `proj.ios`.
+1. Open the XCode project under `proj.ios_mac`.
 2. Build the project, run it, and you're ready to go! The application should launch in the simulator or on your device.
 
 Take a look around, and get a feel for all you can do with cocos2dx-store.
@@ -69,6 +73,6 @@ This project contains three main scenes: MainScene, StoreAScene, and StoreBScene
 
 ## License
 
-MIT License. Copyright (c) 2012 SOOMLA. http://project.soom.la
+MIT License. Copyright (c) 2014 SOOMLA. http://project.soom.la
 + http://www.opensource.org/licenses/MIT
 
