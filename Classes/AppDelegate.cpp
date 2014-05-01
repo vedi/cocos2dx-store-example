@@ -15,7 +15,7 @@
  */
 
 #include "AppDelegate.h"
-#include "Soomla.h"
+#include "Cocos2dxStore.h"
 #include "MuffinRushAssets.h"
 #include "StoreAScene.h"
 #include "MainScene.h"
@@ -38,14 +38,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	MuffinRushAssets *assets = MuffinRushAssets::create();
     CCDictionary *storeParams = CCDictionary::create();
     storeParams->
-        setObject(CCString::create("ExampleSoomSecret"), "soomSec");
-    storeParams->
         setObject(CCString::create("ExamplePublicKey"), "androidPublicKey");
     storeParams->
         setObject(CCString::create("ExampleCustomSecret"), "customSecret");
 
+    CCString *soomSec = CCString::create("ExampleSoomSecret");
+    soomla::CCStoreController::sharedStoreController()->setSoomSec(soomSec);
+
     // This is the call to initialize CCStoreController
-	soomla::CCStoreController::createShared(assets, storeParams);
+    soomla::CCStoreController::initShared(assets, storeParams);
 
 	/*
 	 * ** Set the amount of each currency to 10,000 if the **

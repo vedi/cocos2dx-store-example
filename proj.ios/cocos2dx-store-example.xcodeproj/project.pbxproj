@@ -200,12 +200,12 @@
 		6095361C1B8CF51FD446E023 /* LevelIconWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60953D445614ACFFDBA02A6C /* LevelIconWidget.cpp */; };
 		609536E8AC1A02905D172FA4 /* ccb in Resources */ = {isa = PBXBuildFile; fileRef = 60953F58E5024BDDAEEEABBC /* ccb */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
+		9D4AE695190A94E900F76179 /* libCocos2dXiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4AE693190A94E900F76179 /* libCocos2dXiOSStore.a */; };
+		9D4AE696190A94E900F76179 /* libSoomlaiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D4AE694190A94E900F76179 /* libSoomlaiOSStore.a */; };
 		9D91A62A17538F2000FCE86B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D91A62817538F0700FCE86B /* libsqlite3.0.dylib */; };
 		9DE21A961753902100D21B65 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE21A941753901100D21B65 /* Security.framework */; };
 		9DE21A991753903300D21B65 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DE21A971753902900D21B65 /* StoreKit.framework */; };
 		9DEB1D36190574AC00548E5D /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DEB1D35190574AC00548E5D /* libcurl.a */; };
-		9DFD99801906FBE700F67A8B /* libCocos2dXiOSStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DFD997F1906FBE700F67A8B /* libCocos2dXiOSStore.a */; };
-		9DFD99821906FC5E00F67A8B /* libSoomlaiOSStore_testing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DFD99811906FC5E00F67A8B /* libSoomlaiOSStore_testing.a */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -647,6 +647,8 @@
 		60953D445614ACFFDBA02A6C /* LevelIconWidget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelIconWidget.cpp; sourceTree = "<group>"; };
 		60953F58E5024BDDAEEEABBC /* ccb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; path = ccb; sourceTree = "<group>"; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
+		9D4AE693190A94E900F76179 /* libCocos2dXiOSStore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocos2dXiOSStore.a; path = ../../../../prebuilt/ios/libCocos2dXiOSStore.a; sourceTree = "<group>"; };
+		9D4AE694190A94E900F76179 /* libSoomlaiOSStore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSoomlaiOSStore.a; path = ../../../../prebuilt/ios/libSoomlaiOSStore.a; sourceTree = "<group>"; };
 		9D64AACE190648750091D664 /* libCocos2dXiOSStore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocos2dXiOSStore.a; path = "../../../../build-soomla/build-cocos2dx-store-ios/build/debug/libCocos2dXiOSStore.a"; sourceTree = "<group>"; };
 		9D91A62817538F0700FCE86B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		9DE21A941753901100D21B65 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -679,8 +681,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DFD99821906FC5E00F67A8B /* libSoomlaiOSStore_testing.a in Frameworks */,
-				9DFD99801906FBE700F67A8B /* libCocos2dXiOSStore.a in Frameworks */,
+				9D4AE695190A94E900F76179 /* libCocos2dXiOSStore.a in Frameworks */,
+				9D4AE696190A94E900F76179 /* libSoomlaiOSStore.a in Frameworks */,
 				9DEB1D36190574AC00548E5D /* libcurl.a in Frameworks */,
 				C05F2F0C187AB971007C7025 /* AdSupport.framework in Frameworks */,
 				15A3DA6A1682F886002FB0C5 /* libcocos2dx.a in Frameworks */,
@@ -1014,6 +1016,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D4AE693190A94E900F76179 /* libCocos2dXiOSStore.a */,
+				9D4AE694190A94E900F76179 /* libSoomlaiOSStore.a */,
 				9DFD99811906FC5E00F67A8B /* libSoomlaiOSStore_testing.a */,
 				9DFD997F1906FBE700F67A8B /* libCocos2dXiOSStore.a */,
 				9D64AACE190648750091D664 /* libCocos2dXiOSStore.a */,
@@ -1955,18 +1959,15 @@
 					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios\"",
 					"\"$(SRCROOT)/../../../cocos2dx/platform/ios\"",
 					"\"$(SRCROOT)/../../../cocos2dx/platform/ios/Simulation\"",
-					"../../../../build-soomla/build-ios-store/build/debug/headers/public/",
-					"../../../../build-soomla/build-cocos2dx-store-ios/build/Debug-iphoneos/include/Cocos2dXiOSStore/",
+					"\"$(SRCROOT)/../../../../build-soomla/build-ios-store/build/debug/headers/public\"",
+					"\"$(SRCROOT)/../../../../build-soomla/build-cocos2dx-store-ios/build/Debug-iphoneos/headers/public\"",
 				);
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios/libraries\"",
-					"/Users/vedi/Documents/Projects/soomla/builder/build-soomla/build-ios-store/build/debug",
-					"/Users/vedi/Documents/Projects/soomla/builder/cocos2d-x/cocos2dx/platform/third_party/ios/libraries",
-					"/Users/vedi/Documents/Projects/soomla/builder/build-soomla/build-cocos2dx-store-ios/build/debug",
-					"/Users/vedi/Documents/Projects/soomla/builder/cocos2d-x/extensions/cocos2dx-store/soomla-native/compilations/debug",
-					"/Users/vedi/Documents/Projects/soomla/builder/cocos2d-x/extensions/cocos2dx-store/soomla-native/compilations/iOSStore",
+					"\"$(SRCROOT)/../../../extensions/cocos2dx-store/soomla-native/compilations/ios/debug\"",
+					"\"$(SRCROOT)/../../../extensions/cocos2dx-store/soomla-native/compilations/ios/iOSStore\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cocos2dx-store-example";
@@ -2008,18 +2009,15 @@
 					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios\"",
 					"\"$(SRCROOT)/../../../cocos2dx/platform/ios\"",
 					"\"$(SRCROOT)/../../../cocos2dx/platform/ios/Simulation\"",
-					"../../../../build-soomla/build-ios-store/build/debug/headers/public/",
-					"../../../../build-soomla/build-cocos2dx-store-ios/build/Debug-iphoneos/include/Cocos2dXiOSStore/",
+					"\"$(SRCROOT)/../../../../build-soomla/build-ios-store/build/debug/headers/public\"",
+					"\"$(SRCROOT)/../../../../build-soomla/build-cocos2dx-store-ios/build/Debug-iphoneos/headers/public\"",
 				);
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios/libraries\"",
-					"/Users/vedi/Documents/Projects/soomla/builder/build-soomla/build-ios-store/build/debug",
-					"/Users/vedi/Documents/Projects/soomla/builder/cocos2d-x/cocos2dx/platform/third_party/ios/libraries",
-					"/Users/vedi/Documents/Projects/soomla/builder/build-soomla/build-cocos2dx-store-ios/build/debug",
-					"/Users/vedi/Documents/Projects/soomla/builder/cocos2d-x/extensions/cocos2dx-store/soomla-native/compilations/debug",
-					"/Users/vedi/Documents/Projects/soomla/builder/cocos2d-x/extensions/cocos2dx-store/soomla-native/compilations/iOSStore",
+					"\"$(SRCROOT)/../../../extensions/cocos2dx-store/soomla-native/compilations/ios/debug\"",
+					"\"$(SRCROOT)/../../../extensions/cocos2dx-store/soomla-native/compilations/ios/iOSStore\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "cocos2dx-store-example";
