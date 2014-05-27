@@ -15,7 +15,7 @@
  */
 
 #include "ExampleEventHandler.h"
-#include "Soomla.h"
+#include "Cocos2dxStore.h"
 #include "cocos2d.h"
 
 #define TAG "ExampleEventHandler >>>"
