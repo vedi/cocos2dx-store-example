@@ -16,7 +16,7 @@
 
 #include "StoreBScene.h"
 
-#include "Soomla.h"
+#include "Cocos2dxStore.h"
 #include "StoreAScene.h"
 #include "ExampleEventHandler.h"
 

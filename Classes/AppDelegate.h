@@ -18,6 +18,7 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+
 #include "CCEventHandler.h"
 
 /**

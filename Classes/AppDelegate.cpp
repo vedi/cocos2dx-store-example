@@ -15,7 +15,7 @@
  */
 
 #include "AppDelegate.h"
-#include "Soomla.h"
+#include "Cocos2dxStore.h"
 #include "MuffinRushAssets.h"
 #include "StoreAScene.h"
 #include "MainScene.h"
@@ -33,7 +33,6 @@ AppDelegate::~AppDelegate()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-
     // We initialize CCStoreController and the event handler before
     // we open the store.
     soomla::CCSoomla::sharedSoomla()->addEventHandler(handler);
@@ -41,14 +40,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
     MuffinRushAssets *assets = MuffinRushAssets::create();
     CCDictionary *storeParams = CCDictionary::create();
     storeParams->
-            setObject(CCString::create("ExampleSoomSecret"), "soomSec");
-    storeParams->
             setObject(CCString::create("ExamplePublicKey"), "androidPublicKey");
     storeParams->
             setObject(CCString::create("ExampleCustomSecret"), "customSecret");
 
+    CCString *soomSec = CCString::create("ExampleSoomSecret");
+    soomla::CCStoreController::sharedStoreController()->setSoomSec(soomSec);
+
     // This is the call to initialize CCStoreController
-    soomla::CCStoreController::createShared(assets, storeParams);
+    soomla::CCStoreController::initShared(assets, storeParams);
 
     /*
      * ** Set the amount of each currency to 10,000 if the **
@@ -99,7 +99,7 @@ void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
 
     // if you use SimpleAudioEngine, it must be pause
-    // SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+    // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
 // this function will be called when the app is active again
@@ -107,5 +107,5 @@ void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
 
     // if you use SimpleAudioEngine, it must resume here
-    // SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+    // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }
