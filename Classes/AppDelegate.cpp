@@ -38,13 +38,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     soomla::CCSoomla::sharedSoomla()->addEventHandler(handler);
 
     MuffinRushAssets *assets = MuffinRushAssets::create();
-    CCDictionary *storeParams = CCDictionary::create();
-    storeParams->
-            setObject(CCString::create("ExamplePublicKey"), "androidPublicKey");
-    storeParams->
-            setObject(CCString::create("ExampleCustomSecret"), "customSecret");
+    __Dictionary *storeParams = __Dictionary::create();
+    storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
+    storeParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
 
-    CCString *soomSec = CCString::create("ExampleSoomSecret");
+    __String *soomSec = __String::create("ExampleSoomSecret");
     soomla::CCStoreController::sharedStoreController()->setSoomSec(soomSec);
 
     // This is the call to initialize CCStoreController

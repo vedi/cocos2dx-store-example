@@ -69,7 +69,7 @@ void ExampleEventHandler::onMarketPurchaseCancelled(soomla::CCPurchasableVirtual
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchaseCancelled");
 }
 
-void ExampleEventHandler::onMarketPurchase(soomla::CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::CCString *receiptUrl) {
+void ExampleEventHandler::onMarketPurchase(soomla::CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *token, cocos2d::__String *payload) {
     soomla::CCStoreUtils::logDebug(TAG, "MarketPurchase");
 }
 
