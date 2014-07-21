@@ -18,7 +18,7 @@
 #define __ExampleEventHandler__
 
 #include <string>
-#include "CCStoreEventHandler.h"
+#include "Cocos2dxStore.h"
 
 
 #define EVENT_ON_CURRENCY_BALANCE_CHANGED "onCurrencyBalanceChanged"

@@ -18,8 +18,7 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
-
-#include "CCStoreEventHandler.h"
+#include "Cocos2dxStore.h"
 
 /**
 @brief    The cocos2d Application.

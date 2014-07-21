@@ -6,7 +6,6 @@
 #include "StoreAScene.h"
 #include "MainScene.h"
 #include "StoreBScene.h"
-#include "Cocos2dxStore.h"
 #include "ExampleEventHandler.h"
 
 using namespace soomla;

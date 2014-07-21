@@ -15,14 +15,10 @@
  */
 
 #include "AppDelegate.h"
-#include "Cocos2dxStore.h"
 #include "MuffinRushAssets.h"
-#include "StoreAScene.h"
 #include "MainScene.h"
 #include "ExampleEventHandler.h"
-#include "CCStoreEventDispatcher.h"
 #include "CCServiceManager.h"
-#include "CCStoreService.h"
 
 USING_NS_CC;
 
@@ -40,8 +36,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
     soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
 
-    // We initialize CCStoreController and the event handler before
-    // we open the store.
     MuffinRushAssets *assets = MuffinRushAssets::create();
 
     __Dictionary *storeParams = __Dictionary::create();
