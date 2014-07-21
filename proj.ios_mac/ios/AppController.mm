@@ -27,6 +27,8 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import "ServiceManager.h"
+#import "StoreService.h"
 
 @implementation AppController
 
@@ -36,7 +38,9 @@
 // cocos2d application instance
 static AppDelegate s_sharedApplication;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
 
     // Override point for customization after application launch.
 

@@ -18,7 +18,7 @@
 #define __ExampleEventHandler__
 
 #include <string>
-#include "CCEventHandler.h"
+#include "CCStoreEventHandler.h"
 
 
 #define EVENT_ON_CURRENCY_BALANCE_CHANGED "onCurrencyBalanceChanged"
@@ -29,7 +29,7 @@
 
 using namespace std;
 
-class ExampleEventHandler : public soomla::CCEventHandler {
+class ExampleEventHandler : public soomla::CCStoreEventHandler {
 public:
 
     virtual void onBillingNotSupported();
@@ -67,6 +67,8 @@ public:
     virtual void onStoreControllerInitialized();
 
     virtual void onMarketItemsRefreshed();
+
+    virtual void onMarketItemsRefreshStarted();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     virtual void onMarketRefund(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);

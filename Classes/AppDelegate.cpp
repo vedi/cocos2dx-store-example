@@ -20,6 +20,9 @@
 #include "StoreAScene.h"
 #include "MainScene.h"
 #include "ExampleEventHandler.h"
+#include "CCStoreEventDispatcher.h"
+#include "CCServiceManager.h"
+#include "CCStoreService.h"
 
 USING_NS_CC;
 
@@ -29,24 +32,22 @@ AppDelegate::AppDelegate() {
 
 AppDelegate::~AppDelegate() 
 {
-    soomla::CCSoomla::sharedSoomla()->removeEventHandler(handler);
+    soomla::CCStoreEventDispatcher::getInstance()->removeEventHandler(handler);
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+    __Dictionary *commonParams = __Dictionary::create();
+    commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
+    soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+
     // We initialize CCStoreController and the event handler before
     // we open the store.
-    soomla::CCSoomla::sharedSoomla()->addEventHandler(handler);
-
     MuffinRushAssets *assets = MuffinRushAssets::create();
+
     __Dictionary *storeParams = __Dictionary::create();
     storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
-    storeParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
 
-    __String *soomSec = __String::create("ExampleSoomSecret");
-    soomla::CCStoreController::sharedStoreController()->setSoomSec(soomSec);
-
-    // This is the call to initialize CCStoreController
-    soomla::CCStoreController::initShared(assets, storeParams);
+    soomla::CCStoreService::initShared(assets, storeParams);
 
     /*
      * ** Set the amount of each currency to 10,000 if the **
@@ -55,9 +56,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
      * ** Of course, this is just for testing...           **
      */
 
-    CCArray *currencies =
+    __Array *currencies =
             soomla::CCStoreInfo::sharedStoreInfo()->getVirtualCurrencies();
-    CCObject *currencyObject;
+    Ref *currencyObject;
     CCARRAY_FOREACH(currencies, currencyObject) {
             soomla::CCVirtualCurrency *vc =
                     dynamic_cast<soomla::CCVirtualCurrency *>(currencyObject);
@@ -68,6 +69,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
                         giveItem(vc->getItemId()->getCString(), 10000 - balance, NULL);
             }
         }
+
+    soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(handler);
 
     // initialize director
     auto director = Director::getInstance();

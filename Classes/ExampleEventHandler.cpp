@@ -101,6 +101,10 @@ void ExampleEventHandler::onMarketItemsRefreshed() {
     soomla::CCStoreUtils::logDebug(TAG, "MarketItemsRefreshed");
 }
 
+void ExampleEventHandler::onMarketItemsRefreshStarted() {
+    soomla::CCStoreUtils::logDebug(TAG, "MarketItemsRefreshStarted");
+}
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 
 void ExampleEventHandler::onMarketRefund(soomla::CCPurchasableVirtualItem *purchasableVirtualItem) {
@@ -115,4 +119,3 @@ void ExampleEventHandler::onIabServiceStopped() {
     soomla::CCStoreUtils::logDebug(TAG, "IabServiceStopped");
 }
 #endif
-

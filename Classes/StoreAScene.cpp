@@ -95,7 +95,7 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
             std::string name = " ";
             std::string info = " ";
 
-            CCSoomlaError *soomlaError = NULL;
+            CCError *soomlaError = NULL;
 
             CCVirtualItem *virtualItem;
             virtualItem = CCStoreInfo::sharedStoreInfo()->getItemByItemId(itemId.c_str(), &soomlaError);
@@ -147,7 +147,7 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     mGoodsTableView->setDelegate(this);
     mGoodsTableView->reloadData();
 
-    CCSoomlaError *soomlaError = NULL;
+    CCError *soomlaError = NULL;
     int balance = CCStoreInventory::sharedStoreInventory()->getItemBalance("currency_muffin", &soomlaError);
     if (soomlaError) {
         CCStoreUtils::logException("StoreAScene::setCurrencyBalanceLabel", soomlaError);
@@ -343,7 +343,7 @@ CCSize StoreAScene::tableCellSizeForIndex(TableView *table, ssize_t idx) {
 }
 
 void StoreAScene::setProgressForItem(string &itemId, LevelIconWidget *pWidget) {
-    CCSoomlaError *soomlaError = NULL;
+    CCError *soomlaError = NULL;
     int progress = CCStoreInventory::sharedStoreInventory()->getGoodUpgradeLevel(itemId.c_str(), &soomlaError);
     if (soomlaError) {
         CCStoreUtils::logException("StoreAScene::setProgressForItem", soomlaError);
@@ -354,7 +354,7 @@ void StoreAScene::setProgressForItem(string &itemId, LevelIconWidget *pWidget) {
 }
 
 void StoreAScene::setEquippedForItem(string &itemId, LevelIconWidget *pWidget) {
-    CCSoomlaError *soomlaError = NULL;
+    CCError *soomlaError = NULL;
     bool equipped = CCStoreInventory::sharedStoreInventory()->isVirtualGoodEquipped(itemId.c_str(), &soomlaError);
     if (soomlaError) {
         CCStoreUtils::logException("StoreAScene::setEquippedForItem", soomlaError);
