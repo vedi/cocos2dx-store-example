@@ -84,7 +84,7 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     shiftToBottom(mBottomNode);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    CCStoreController::sharedStoreController()->startIabServiceInBg();
+    CCSoomlaStore::getInstance()->startIabServiceInBg();
 #endif
 
     ////*****
@@ -207,7 +207,7 @@ void StoreAScene::onBack(CCObject *pSender) {
     CC_UNUSED_PARAM(pSender);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    CCStoreController::sharedStoreController()->stopIabServiceInBg();
+    CCSoomlaStore::getInstance()->stopIabServiceInBg();
 #endif
 
     CCScene *s = MainScene::getMainScene();
