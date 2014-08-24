@@ -66,7 +66,7 @@ public:
 
     virtual void onStoreControllerInitialized();
 
-    virtual void onMarketItemsRefreshed();
+    virtual void onMarketItemsRefreshed(cocos2d::__Array *pArray);
 
     virtual void onMarketItemsRefreshStarted();
 

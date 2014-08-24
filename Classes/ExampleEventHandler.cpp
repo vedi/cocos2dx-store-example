@@ -96,7 +96,7 @@ void ExampleEventHandler::onStoreControllerInitialized() {
     soomla::CCStoreUtils::logDebug(TAG, "StoreContorllerInitialized");
 }
 
-void ExampleEventHandler::onMarketItemsRefreshed() {
+void ExampleEventHandler::onMarketItemsRefreshed(cocos2d::__Array *pArray) {
     soomla::CCStoreUtils::logDebug(TAG, "MarketItemsRefreshed");
 }
 
