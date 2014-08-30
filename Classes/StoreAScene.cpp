@@ -102,13 +102,13 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
                 name = virtualItem->getName()->getCString();
                 info = virtualItem->getDescription()->getCString();
             } else {
-                CCStoreUtils::logException("StoreAScene::createListViewItem", soomlaError);
+                CCSoomlaUtils::logException("StoreAScene::createListViewItem", soomlaError);
             }
 
             soomlaError = NULL;
             int balance = CCStoreInventory::sharedStoreInventory()->getItemBalance(itemId.c_str(), &soomlaError);
             if (soomlaError) {
-                CCStoreUtils::logException("StoreAScene::getItemBalance", soomlaError);
+                CCSoomlaUtils::logException("StoreAScene::getItemBalance", soomlaError);
                 balance = 0;
                 CC_ASSERT(false);
             }
@@ -149,7 +149,7 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     CCError *soomlaError = NULL;
     int balance = CCStoreInventory::sharedStoreInventory()->getItemBalance("currency_muffin", &soomlaError);
     if (soomlaError) {
-        CCStoreUtils::logException("StoreAScene::setCurrencyBalanceLabel", soomlaError);
+        CCSoomlaUtils::logException("StoreAScene::setCurrencyBalanceLabel", soomlaError);
         balance = 0;
         CCLog("Soomla balance error");
     }
@@ -345,7 +345,7 @@ void StoreAScene::setProgressForItem(string &itemId, LevelIconWidget *pWidget) {
     CCError *soomlaError = NULL;
     int progress = CCStoreInventory::sharedStoreInventory()->getGoodUpgradeLevel(itemId.c_str(), &soomlaError);
     if (soomlaError) {
-        CCStoreUtils::logException("StoreAScene::setProgressForItem", soomlaError);
+        CCSoomlaUtils::logException("StoreAScene::setProgressForItem", soomlaError);
         progress = 0;
         CC_ASSERT(false);
     }
@@ -356,7 +356,7 @@ void StoreAScene::setEquippedForItem(string &itemId, LevelIconWidget *pWidget) {
     CCError *soomlaError = NULL;
     bool equipped = CCStoreInventory::sharedStoreInventory()->isVirtualGoodEquipped(itemId.c_str(), &soomlaError);
     if (soomlaError) {
-        CCStoreUtils::logException("StoreAScene::setEquippedForItem", soomlaError);
+        CCSoomlaUtils::logException("StoreAScene::setEquippedForItem", soomlaError);
         equipped = false;
         CC_ASSERT(false);
     }
