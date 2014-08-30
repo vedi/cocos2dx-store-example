@@ -38,5 +38,5 @@ $(call import-module,editor-support/cocosbuilder)
 # $(call import-module,network)
 $(call import-module,extensions)
 
-$(call import-module,extensions/cocos2dx-store/android/jni)
+$(call import-module,extensions/cocos2dx-store)
 
