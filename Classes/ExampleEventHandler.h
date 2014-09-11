@@ -18,7 +18,6 @@
 #define __ExampleEventHandler__
 
 #include <string>
-#include "Cocos2dxCore.h"
 #include "Cocos2dxStore.h"
 
 

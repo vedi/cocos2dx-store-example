@@ -16,7 +16,6 @@
 
 #include "StoreBScene.h"
 
-#include "Cocos2dxCore.h"
 #include "Cocos2dxStore.h"
 #include "StoreAScene.h"
 #include "ExampleEventHandler.h"
