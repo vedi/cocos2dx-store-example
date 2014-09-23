@@ -14,14 +14,12 @@ class MuffinRushAssets: public soomla::CCStoreAssets {
     cocos2d::Array *mGoods;
     cocos2d::Array *mCurrencyPacks;
     cocos2d::Array *mCategories;
-    cocos2d::Array *mNonConsumableItems;
 public:
     MuffinRushAssets():
     mCurrencies(NULL),
     mGoods(NULL),
     mCurrencyPacks(NULL),
-    mCategories(NULL),
-    mNonConsumableItems(NULL)
+    mCategories(NULL)
     {}
 
     virtual ~MuffinRushAssets();
@@ -38,8 +36,6 @@ public:
     virtual cocos2d::CCArray *getCurrencyPacks();
 
     virtual cocos2d::CCArray *getCategories();
-
-    virtual cocos2d::CCArray *getNonConsumableItems();
 };
 
 
