@@ -1,7 +1,3 @@
-//
-// Created by Fedor Shubin on 5/24/13.
-//
-
 
 #include "MuffinRushAssets.h"
 
@@ -151,7 +147,7 @@ bool MuffinRushAssets::init() {
             CCString::create(""),
             CCString::create("show_room_0"),
             CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(220)));
-	
+
     CCVirtualGood *showRoomGood1 = CCUpgradeVG::create(
             CCString::create("show_room"),
             CCString::create("show_room_0"),
@@ -187,7 +183,7 @@ bool MuffinRushAssets::init() {
 			CCString::create(""),
 			CCString::create("show_room_4"),
 			CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(220)));
-	
+
     CCVirtualGood *deliveryVehicleGood =
             CCLifetimeVG::create(CCString::create("Delivery Vehicle"), // name
                     CCString::create("Delivery Vehicle"), // description
@@ -238,7 +234,7 @@ bool MuffinRushAssets::init() {
 			CCString::create(""),
 			CCString::create("delivery_vehicle_4"),
 			CCPurchaseWithVirtualItem::create(CCString::create(MUFFIN_CURRENCY_ITEM_ID), CCInteger::create(20)));
-	
+
     CCVirtualGood *fatCatGood = CCEquippableVG::create(
             CCInteger::create(CCEquippableVG::kCategory),
             CCString::create("Fat Cat"),
@@ -357,4 +353,3 @@ cocos2d::CCArray *MuffinRushAssets::getCategories() {
 cocos2d::CCArray *MuffinRushAssets::getNonConsumableItems() {
     return mNonConsumableItems;
 }
-

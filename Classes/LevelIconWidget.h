@@ -1,6 +1,3 @@
-//
-// Created by vedi on 2/4/13.
-//
 
 
 #ifndef __LevelIconWidget_H_

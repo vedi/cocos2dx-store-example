@@ -1,6 +1,3 @@
-//
-// Created by vedi on 2/4/13.
-//
 
 
 #include "LevelIconWidget.h"
@@ -133,4 +130,3 @@ void LevelIconWidget::onEquipment(CCObject *pSender) {
         soomla::CCStoreUtils::logException("LevelIconWidget::onEquipment", soomlaError);
     }
 }
-
