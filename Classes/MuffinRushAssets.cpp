@@ -8,7 +8,6 @@
 #include "CCPurchaseWithMarket.h"
 #include "CCPurchaseWithVirtualItem.h"
 #include "CCVirtualCategory.h"
-#include "CCNonConsumableItem.h"
 #include "CCUpgradeVG.h"
 #include "CCSingleUsePackVG.h"
 #include "CCEquippableVG.h"
@@ -21,7 +20,7 @@ using namespace soomla;
 #define FIFTYMUFF_PACK_PRODUCT_ID "android.test.canceled"
 #define FOURHUNDMUFF_PACK_PRODUCT_ID "android.test.purchased"
 #define THOUSANDMUFF_PACK_PRODUCT_ID "android.test.item_unavailable"
-#define NO_ADDS_NONCONS_PRODUCT_ID "no_ads"
+#define NO_ADDS_LTVG_PRODUCT_ID "no_ads"
 
 #define MUFFINCAKE_ITEM_ID "fruit_cake"
 #define PAVLOVA_ITEM_ID "pavlova"
@@ -290,24 +289,23 @@ bool MuffinRushAssets::init() {
 
 
     /** Google MANAGED Items **/
-
-    CCNonConsumableItem *noAdsNoncons = CCNonConsumableItem::create(
-            CCString::create("No Ads"),
-            CCString::create("Test purchase of MANAGED item."),
-            CCString::create("no_ads"),
-            CCPurchaseWithMarket::createWithMarketItem(CCMarketItem::create(
-                    CCString::create(NO_ADDS_NONCONS_PRODUCT_ID),
-                    CCInteger::create(CCMarketItem::NONCONSUMABLE), CCDouble::create(1.99))
-            )
+    CCVirtualGood *noAdsLTVG = CCLifetimeVG::create(
+              CCString::create("No Ads"),
+              CCString::create("No More Ads!"),
+              CCString::create("no_ads"),
+              CCPurchaseWithMarket::createWithMarketItem(CCMarketItem::create(
+                            CCString::create(NO_ADDS_LTVG_PRODUCT_ID),
+                            CCInteger::create(CCMarketItem::NONCONSUMABLE), CCDouble::create(1.99))
+              )
     );
-
     mCurrencies = CCArray::create(muffinCurrency, NULL);
     mCurrencies->retain();
 
     mGoods = CCArray::create(muffincakeGood, pavlovaGood, tenPavlovaGoods, choclatecakeGood, creamcupGood, tenCreamcupGoods,
 							 showRoomGood, showRoomGood0, showRoomGood1, showRoomGood2, showRoomGood3, showRoomGood4,
 							 deliveryVehicleGood, deliveryVehicleGood0, deliveryVehicleGood1, deliveryVehicleGood2,
-							 deliveryVehicleGood3, deliveryVehicleGood4, fatCatGood, happiHippoGood, funkeyMonkeyGood, NULL);
+							 deliveryVehicleGood3, deliveryVehicleGood4, fatCatGood, happiHippoGood, funkeyMonkeyGood,
+                             noAdsLTVG, NULL);
     mGoods->retain();
 
     mCurrencyPacks = CCArray::create(tenmuffPack, fiftymuffPack, fourhundmuffPack, thousandmuffPack, NULL);
@@ -315,9 +313,6 @@ bool MuffinRushAssets::init() {
 
     mCategories = CCArray::create(cakes, upgrades, characters, NULL);
     mCategories->retain();
-
-    mNonConsumableItems = CCArray::create(noAdsNoncons, NULL);
-    mNonConsumableItems->retain();
 
     return true;
 }
@@ -327,7 +322,6 @@ MuffinRushAssets::~MuffinRushAssets() {
     CC_SAFE_RELEASE(mGoods);
     CC_SAFE_RELEASE(mCurrencyPacks);
     CC_SAFE_RELEASE(mCategories);
-    CC_SAFE_RELEASE(mNonConsumableItems);
 }
 
 int MuffinRushAssets::getVersion() {
@@ -350,6 +344,3 @@ cocos2d::CCArray *MuffinRushAssets::getCategories() {
     return mCategories;
 }
 
-cocos2d::CCArray *MuffinRushAssets::getNonConsumableItems() {
-    return mNonConsumableItems;
-}

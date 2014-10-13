@@ -13,10 +13,11 @@ While the 3rd version of cocos2d-x is not stable, we put all related code to bra
     $ git clone git@github.com:cocos2d/cocos2d-x.git
     ```
 
-2. Recursively clone our [cocos2dx-store](https://github.com/soomla/cocos2dx-store) library into the `extensions` directory in the root of your Cocos2d-x framework.
+2. Clone [soomla-cocos2dx-core](https://github.com/soomla/soomla-cocos2dx-core) and [cocos2dx-store](https://github.com/soomla/cocos2dx-store) into the `extensions` directory in the root of your Cocos2d-x framework.
     ```
     $ cd cocos2dx
-    $ git clone --recursive git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
+    $ git clone git@github.com:soomla/soomla-cocos2dx-core.git extensions/soomla-cocos2dx-core
+    $ git clone git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
     ```
 
 3. Clone our [fork](https://github.com/vedi/jansson) of the janssen library into the `external` directory in the root of your Cocos2d-x framework.
