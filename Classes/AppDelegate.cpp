@@ -34,10 +34,13 @@ AppDelegate::~AppDelegate()
 bool AppDelegate::applicationDidFinishLaunching() {
 
     MuffinRushAssets *assets = MuffinRushAssets::create();
+    
+    __Dictionary *commonParams = __Dictionary::create();
+    commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
+    soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
 
     __Dictionary *storeParams = __Dictionary::create();
     storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
-    storeParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
     storeParams->setObject(__Bool::create(true), "testPurchases");
 
     soomla::CCStoreService::initShared(assets, storeParams);
