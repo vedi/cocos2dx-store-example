@@ -20,7 +20,7 @@ using namespace soomla;
 #define FIFTYMUFF_PACK_PRODUCT_ID "android.test.canceled"
 #define FOURHUNDMUFF_PACK_PRODUCT_ID "android.test.purchased"
 #define THOUSANDMUFF_PACK_PRODUCT_ID "android.test.item_unavailable"
-#define NO_ADDS_LTVG_PRODUCT_ID "no_ads"
+#define NO_ADDS_LTVG_PRODUCT_ID "cocos2dx_no_ads"
 
 #define MUFFINCAKE_ITEM_ID "fruit_cake"
 #define PAVLOVA_ITEM_ID "pavlova"

@@ -18,7 +18,7 @@
 #include "MuffinRushAssets.h"
 #include "MainScene.h"
 #include "ExampleEventHandler.h"
-#include "CCServiceManager.h"
+#include "Cocos2dxStore.h"
 
 USING_NS_CC;
 
@@ -53,7 +53,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
      */
 
     __Array *currencies =
-            soomla::CCStoreInfo::sharedStoreInfo()->getVirtualCurrencies();
+            soomla::CCStoreInfo::sharedStoreInfo()->getCurrencies();
     Ref *currencyObject;
     CCARRAY_FOREACH(currencies, currencyObject) {
             soomla::CCVirtualCurrency *vc =
