@@ -46,7 +46,7 @@ public:
 
     virtual void onGoodUpgrade(soomla::CCVirtualGood *virtualGood, soomla::CCUpgradeVG *upgradeVG);
 
-    virtual void onItemPurchased(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
+    virtual void onItemPurchased(soomla::CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *payload);
 
     virtual void onItemPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
 
@@ -62,9 +62,9 @@ public:
 
     virtual void onRestoreTransactionsFinished(bool success);
 
-    virtual void onUnexpectedErrorInStore();
+    virtual void onUnexpectedErrorInStore(cocos2d::__String *errorMessage);
 
-    virtual void onStoreControllerInitialized();
+    virtual void onSoomlaStoreInitialized();
 
     virtual void onMarketItemsRefreshed(cocos2d::__Array *virtualItems);
 

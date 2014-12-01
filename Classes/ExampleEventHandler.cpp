@@ -58,7 +58,7 @@ void ExampleEventHandler::onGoodUpgrade(CCVirtualGood *virtualGood, CCUpgradeVG 
     CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_UPGRADE, virtualGood);
 }
 
-void ExampleEventHandler::onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem) {
+void ExampleEventHandler::onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *payload) {
     CCSoomlaUtils::logDebug(TAG, "ItemPurchased");
 }
 
@@ -90,11 +90,11 @@ void ExampleEventHandler::onRestoreTransactionsFinished(bool success) {
     CCSoomlaUtils::logDebug(TAG, "RestoreTransactionsFinished");
 }
 
-void ExampleEventHandler::onUnexpectedErrorInStore() {
+void ExampleEventHandler::onUnexpectedErrorInStore(cocos2d::__String *errorMessage) {
     CCSoomlaUtils::logDebug(TAG, "UnexpectedErrorInStore");
 }
 
-void ExampleEventHandler::onStoreControllerInitialized() {
+void ExampleEventHandler::onSoomlaStoreInitialized() {
     CCSoomlaUtils::logDebug(TAG, "StoreContorllerInitialized");
 }
 
