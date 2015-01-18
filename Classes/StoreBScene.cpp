@@ -28,14 +28,14 @@
 USING_NS_CC;
 using namespace soomla;
 
-CCScene* StoreBScene::getStoreBScene() {
-    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::sharedNodeLoaderLibrary();
+Scene* StoreBScene::getStoreBScene() {
+    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::getInstance();
 
-    ccNodeLoaderLibrary->registerCCNodeLoader("StoreBScene", StoreBSceneLoader::loader());
+    ccNodeLoaderLibrary->registerNodeLoader("StoreBScene", StoreBSceneLoader::loader());
 
     CCBReader *ccbReader = new CCBReader(ccNodeLoaderLibrary);
     ccbReader->retain();
-    CCScene *pScene = ccbReader->createSceneWithNodeGraphFromFile("ccb/StoreBScene.ccbi");
+    Scene *pScene = ccbReader->createSceneWithNodeGraphFromFile("ccb/StoreBScene.ccbi");
     ccbReader->release();
     return pScene;
 }
@@ -51,21 +51,21 @@ bool StoreBScene::init() {
     return true;
 }
 
-void StoreBScene::onBack(CCObject* pSender) {
+void StoreBScene::onBack(Ref* pSender) {
 
     CC_UNUSED_PARAM(pSender);
 
-    CCScene *s = StoreAScene::getGoodsStoreScene();
-    CCDirector::sharedDirector()->setDepthTest(true);
-    CCTransitionScene *transition = CCTransitionMoveInL::create(0.8f, s);
+    Scene *s = StoreAScene::getGoodsStoreScene();
+    CCDirector::getInstance()->setDepthTest(true);
+    TransitionScene *transition = TransitionMoveInL::create(0.8f, s);
 
-    CCDirector::sharedDirector()->replaceScene(transition);
+    CCDirector::getInstance()->replaceScene(transition);
 }
 
 
-void StoreBScene::onBuy(CCObject* pSender) {
+void StoreBScene::onBuy(Ref* pSender) {
     if (pSender) {
-        int tag = ((CCNode*)pSender)->getTag();
+        int tag = ((Node*)pSender)->getTag();
         string itemId = itemIdFromTag(tag);
         CCError *soomlaError = NULL;
         CCStoreInventory::sharedStoreInventory()->buyItem(itemId.c_str(), &soomlaError);
@@ -88,18 +88,18 @@ string StoreBScene::itemIdFromTag(int tag) {
 }
 
 void StoreBScene::onEnter() {
-    CCLayer::onEnter();
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+    Layer::onEnter();
+    __NotificationCenter::getInstance()->addObserver(this,
             callfuncO_selector(StoreBScene::updateCurrencyBalance),
             EVENT_ON_CURRENCY_BALANCE_CHANGED, NULL);
 }
 
 void StoreBScene::onExit() {
-    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_CURRENCY_BALANCE_CHANGED);
+    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_CURRENCY_BALANCE_CHANGED);
     CCLayer::onExit();
 }
 
-void StoreBScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
+void StoreBScene::onNodeLoaded(Node *pNode, NodeLoader *pNodeLoader) {
 
     CC_UNUSED_PARAM(pNode);
     CC_UNUSED_PARAM(pNodeLoader);
@@ -147,22 +147,22 @@ void StoreBScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     if (soomlaError) {
         CCSoomlaUtils::logException("StoreBScene", soomlaError);
         balance = 0;
-        CCLog("Soomla balance error");
+        CCLOG("Soomla balance error");
     }
     updateCurrencyBalance(CCInteger::create(balance));
 }
 
-SEL_MenuHandler StoreBScene::onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName) {
+SEL_MenuHandler StoreBScene::onResolveCCBCCMenuItemSelector(Ref *pTarget, char const *pSelectorName) {
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBuy", StoreBScene::onBuy)
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", StoreBScene::onBack)
     return NULL;
 }
 
-bool StoreBScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", CCNode *, mBackgroundNode)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode *, mMainNode)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", CCNode *, mTopNode)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", CCNode *, mBottomNode)
+bool StoreBScene::onAssignCCBMemberVariable(Ref *pTarget, char const *pMemberVariableName, Node *pNode) {
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", Node *, mBackgroundNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", Node *, mMainNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", Node *, mTopNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", Node *, mBottomNode)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", Label *, mMuffinAmount)
 
     if (strcmp(pMemberVariableName, ("mGoodTitles")) == 0) {
@@ -183,7 +183,7 @@ bool StoreBScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemb
 
 void StoreBScene::updateCurrencyBalance(Ref *pBalance) {
     char buf[20] = "/0";
-    sprintf(buf, "%i", ((CCInteger *)pBalance)->getValue());
+    sprintf(buf, "%i", ((__Integer *)pBalance)->getValue());
     mMuffinAmount->setString(buf);
 }
 

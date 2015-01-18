@@ -30,7 +30,7 @@ using namespace std;
 #define GOODS_NUMBER 5
 
 class StoreBScene :
-    public CCLayer,
+    public Layer,
     public CCBSelectorResolver,
     public CCBMemberVariableAssigner,
     public NodeLoaderListener {
@@ -47,24 +47,24 @@ public:
         , mMuffinAmount(NULL)
     {}
 
-    static cocos2d::CCScene*getStoreBScene();
+    static cocos2d::Scene*getStoreBScene();
 
     virtual void onEnter();
     virtual void onExit();
 
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;}
-    virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode);
-    virtual void onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(Ref *pTarget, char const *pSelectorName);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(Ref *pTarget, char const *pSelectorName) {return NULL;}
+    virtual bool onAssignCCBMemberVariable(Ref *pTarget, char const *pMemberVariableName, Node *pNode);
+    virtual void onNodeLoaded(Node *pNode, NodeLoader *pNodeLoader);
 
     virtual void updateCurrencyBalance(Ref *pBalance);
 
     virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event) override;
 private:
-    CCNode* mBackgroundNode;
-    CCNode* mMainNode;
-    CCNode *mTopNode;
-    CCNode *mBottomNode;
+    Node* mBackgroundNode;
+    Node* mMainNode;
+    Node *mTopNode;
+    Node *mBottomNode;
 
     Label *mMuffinAmount;
 
@@ -76,8 +76,8 @@ private:
     virtual bool init();  
 
     // a selector callback
-	void onBack(CCObject* pSender);
-	void onBuy(CCObject* pSender);
+	void onBack(Ref* pSender);
+	void onBuy(Ref* pSender);
 };
 
 class StoreBSceneLoader: public LayerLoader {

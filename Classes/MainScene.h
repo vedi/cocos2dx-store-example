@@ -25,23 +25,23 @@ USING_NS_CC_EXT;
 
 using namespace cocosbuilder;
 
-class Soomla : public CCSprite {
+class Soomla : public Sprite {
 public:
     CREATE_FUNC(Soomla);
 };
 
 class MainScene:
-    public cocos2d::CCLayer,
+    public cocos2d::Layer,
     public CCBSelectorResolver,
     public CCBMemberVariableAssigner,
     public NodeLoaderListener {
 private:
-    CCPoint mOriginalPos;
+    Vec2 mOriginalPos;
 private:
-	CCNode* mBackgroundNode;
-	CCNode* mMainNode;
-	CCNode* mUnlockArea;
-	CCNode* mUnlocker;
+	Node* mBackgroundNode;
+	Node* mMainNode;
+	Node* mUnlockArea;
+	Node* mUnlocker;
     EventListenerTouchOneByOne * listener;
 public:
     CREATE_FUNC(MainScene);
@@ -52,15 +52,15 @@ public:
         , mUnlockArea(NULL)
         , mUnlocker(NULL)
     {}
-    static cocos2d::CCScene* getMainScene();
+    static cocos2d::Scene* getMainScene();
 
     virtual void onEnter();
     virtual void onExit();
 
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode);
-    virtual void onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(Ref *pTarget, char const *pSelectorName);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(Ref *pTarget, char const *pSelectorName);
+    virtual bool onAssignCCBMemberVariable(Ref *pTarget, char const *pMemberVariableName, Node *pNode);
+    virtual void onNodeLoaded(Node *pNode, NodeLoader *pNodeLoader);
     virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event) override;
 };
 

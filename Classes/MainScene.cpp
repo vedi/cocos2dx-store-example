@@ -26,33 +26,33 @@ USING_NS_CC;
 
 #define SEL_GROUP "soomlaCallback"
 
-CCScene* MainScene::getMainScene() {
-    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::sharedNodeLoaderLibrary();
+Scene* MainScene::getMainScene() {
+    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::getInstance();
 
-    ccNodeLoaderLibrary->registerCCNodeLoader("MainScene", MainSceneLoader::loader());
+    ccNodeLoaderLibrary->registerNodeLoader("MainScene", MainSceneLoader::loader());
 
     CCBReader *ccbReader = new CCBReader(ccNodeLoaderLibrary);
 
     return ccbReader->createSceneWithNodeGraphFromFile("ccb/MainScreen.ccbi");
 }
 
-SEL_MenuHandler MainScene::onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName) {
+SEL_MenuHandler MainScene::onResolveCCBCCMenuItemSelector(Ref *pTarget, char const *pSelectorName) {
     return NULL;
 }
 
-cocos2d::extension::Control::Handler MainScene::onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {
+cocos2d::extension::Control::Handler MainScene::onResolveCCBCCControlSelector(Ref *pTarget, char const *pSelectorName) {
     return NULL;
 }
 
-bool MainScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", CCNode*, mBackgroundNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode*, mMainNode);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUnlockArea", CCNode*, mUnlockArea);
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUnlocker", CCNode*, mUnlocker);
+bool MainScene::onAssignCCBMemberVariable(Ref *pTarget, char const *pMemberVariableName, Node *pNode) {
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", Node*, mBackgroundNode);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", Node*, mMainNode);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUnlockArea", Node*, mUnlockArea);
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mUnlocker", Node*, mUnlocker);
     return false;
 }
 
-void MainScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
+void MainScene::onNodeLoaded(Node *pNode, NodeLoader *pNodeLoader) {
     CC_ASSERT(mBackgroundNode);
     CC_ASSERT(mMainNode);
     CC_ASSERT(mUnlockArea);
@@ -66,24 +66,24 @@ void MainScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
 
 void MainScene::onEnter() {
     listener = EventListenerTouchOneByOne::create();
-    listener->onTouchBegan = [this](CCTouch* touch, CCEvent* event) {
+    listener->onTouchBegan = [this](Touch* touch, Event* event) {
         this->mOriginalPos = this->mUnlocker->getPosition();
         return true;
     };
-    listener->onTouchMoved = [this](CCTouch* touch, CCEvent* event) {
-        CCPoint touchPoint = touch->getLocation();
+    listener->onTouchMoved = [this](Touch* touch, Event* event) {
+        Vec2 touchPoint = touch->getLocation();
         this->mUnlocker->setPosition(this->mUnlocker->getParent()->convertToNodeSpace(touchPoint));
     };
-    listener->onTouchEnded = [this](CCTouch* touch, CCEvent* event) {
-        CCRect rect1 = this->mUnlocker->boundingBox();
-        CCRect rect2 = this->mUnlockArea->boundingBox();
+    listener->onTouchEnded = [this](Touch* touch, Event* event) {
+        Rect rect1 = this->mUnlocker->getBoundingBox();
+        Rect rect2 = this->mUnlockArea->getBoundingBox();
 
         if (rect1.intersectsRect(rect2)) {
-            CCScene *s = StoreAScene::getGoodsStoreScene();
-            CCDirector::sharedDirector()->setDepthTest(true);
-            CCTransitionScene *transition = CCTransitionMoveInR::create(0.8f, s);
+            Scene *s = StoreAScene::getGoodsStoreScene();
+            CCDirector::getInstance()->setDepthTest(true);
+            TransitionScene *transition = TransitionMoveInR::create(0.8f, s);
 
-            CCDirector::sharedDirector()->replaceScene(transition);
+            CCDirector::getInstance()->replaceScene(transition);
         }
         else {
             // Snap
@@ -105,6 +105,6 @@ void MainScene::onExit() {
 void MainScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event) {
     Layer::onKeyReleased(keyCode, event);
     if (keyCode == EventKeyboard::KeyCode::KEY_BACKSPACE) {
-        CCDirector::sharedDirector()->end();
+        CCDirector::getInstance()->end();
     }
 }

@@ -7,10 +7,10 @@
 #include "cocos2d.h"
 
 class MuffinRushAssets: public soomla::CCStoreAssets {
-    cocos2d::Array *mCurrencies;
-    cocos2d::Array *mGoods;
-    cocos2d::Array *mCurrencyPacks;
-    cocos2d::Array *mCategories;
+    cocos2d::__Array *mCurrencies;
+    cocos2d::__Array *mGoods;
+    cocos2d::__Array *mCurrencyPacks;
+    cocos2d::__Array *mCategories;
 public:
     MuffinRushAssets():
     mCurrencies(NULL),
@@ -26,13 +26,13 @@ public:
 
     virtual int getVersion();
 
-    virtual cocos2d::CCArray *getCurrencies();
+    virtual cocos2d::__Array *getCurrencies();
 
-    virtual cocos2d::CCArray *getGoods();
+    virtual cocos2d::__Array *getGoods();
 
-    virtual cocos2d::CCArray *getCurrencyPacks();
+    virtual cocos2d::__Array *getCurrencyPacks();
 
-    virtual cocos2d::CCArray *getCategories();
+    virtual cocos2d::__Array *getCategories();
 };
 
 

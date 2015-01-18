@@ -33,29 +33,29 @@ void ExampleEventHandler::onBillingSupported() {
 
 void ExampleEventHandler::onCurrencyBalanceChanged(CCVirtualCurrency *virtualCurrency, int balance, int amountAdded) {
     CCSoomlaUtils::logDebug(TAG, "CurrencyBalanceChanged");
-    CCNotificationCenter::sharedNotificationCenter()->postNotification
+    __NotificationCenter::getInstance()->postNotification
         (EVENT_ON_CURRENCY_BALANCE_CHANGED, CCInteger::create(balance));
 }
 
 void ExampleEventHandler::onGoodBalanceChanged(CCVirtualGood *virtualGood, int balance, int amountAdded) {
     CCSoomlaUtils::logDebug(TAG, "GoodBalanceChanged");
-    CCNotificationCenter::sharedNotificationCenter()->postNotification
+    __NotificationCenter::getInstance()->postNotification
         (EVENT_ON_GOOD_BALANCE_CHANGED, CCArray::create(virtualGood, CCInteger::create(balance), NULL));
 }
 
 void ExampleEventHandler::onGoodEquipped(CCEquippableVG *equippableVG) {
     CCSoomlaUtils::logDebug(TAG, "GoodEquipped");
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_EQUIPPED, equippableVG);
+    __NotificationCenter::getInstance()->postNotification(EVENT_ON_GOOD_EQUIPPED, equippableVG);
 }
 
 void ExampleEventHandler::onGoodUnEquipped(CCEquippableVG *equippableVG) {
     CCSoomlaUtils::logDebug(TAG, "GoodUnEquipped");
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_UNEQUIPPED, equippableVG);
+    __NotificationCenter::getInstance()->postNotification(EVENT_ON_GOOD_UNEQUIPPED, equippableVG);
 }
 
 void ExampleEventHandler::onGoodUpgrade(CCVirtualGood *virtualGood, CCUpgradeVG *upgradeVG) {
     CCSoomlaUtils::logDebug(TAG, "GoodUpgrade");
-    CCNotificationCenter::sharedNotificationCenter()->postNotification(EVENT_ON_GOOD_UPGRADE, virtualGood);
+    __NotificationCenter::getInstance()->postNotification(EVENT_ON_GOOD_UPGRADE, virtualGood);
 }
 
 void ExampleEventHandler::onItemPurchased(CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *payload) {

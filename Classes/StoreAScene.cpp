@@ -34,11 +34,11 @@ StoreAScene::~StoreAScene() {
     }
 }
 
-bool StoreAScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode) {
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", CCNode*, mBackgroundNode)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackground", CCLayerColor*, mBackground)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", CCNode*, mMainNode)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", CCNode*, mTopNode)
+bool StoreAScene::onAssignCCBMemberVariable(Ref *pTarget, char const *pMemberVariableName, Node *pNode) {
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackgroundNode", Node*, mBackgroundNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBackground", LayerColor*, mBackground)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMainNode", Node*, mMainNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mTopNode", Node*, mTopNode)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mMuffinAmount", Label*, mMuffinAmount)
     CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mGoodsTableView", TableView*, mGoodsTableView)
     if(strcmp(pMemberVariableName, "mListRows") == 0) {
@@ -48,14 +48,14 @@ bool StoreAScene::onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemb
         mListItem[pNode->getTag()] = dynamic_cast<LevelIconWidget*>(pNode);
         return true;
     }
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", CCNode*, mBottomNode)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonBack", CCMenuItemImage*, mButtonBack)
-    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonMoreMuffins", CCMenuItemImage*, mButtonMoreMuffins)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mBottomNode", Node*, mBottomNode)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonBack", MenuItemImage*, mButtonBack)
+    CCB_MEMBERVARIABLEASSIGNER_GLUE(this, "mButtonMoreMuffins", MenuItemImage*, mButtonMoreMuffins)
 
     return false;
 }
 
-void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
+void StoreAScene::onNodeLoaded(Node *pNode, NodeLoader *pNodeLoader) {
     CC_UNUSED_PARAM(pNode);
     CC_UNUSED_PARAM(pNodeLoader);
 
@@ -69,7 +69,7 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
         CC_ASSERT(mListRows[i]);
         mListRows[i]->retain();
         mListRows[i]->removeFromParentAndCleanup(false);
-        mListRows[i]->setPosition(CCPointZero);
+        mListRows[i]->setPosition(Vec2::ZERO);
 
         CC_ASSERT(mListItem[i]);
     }
@@ -151,70 +151,70 @@ void StoreAScene::onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader) {
     if (soomlaError) {
         CCSoomlaUtils::logException("StoreAScene::setCurrencyBalanceLabel", soomlaError);
         balance = 0;
-        CCLog("Soomla balance error");
+        CCLOG("Soomla balance error");
     }
 
     updateCurrencyBalance(CCInteger::create(balance));
 }
 
-SEL_MenuHandler StoreAScene::onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName) {
+SEL_MenuHandler StoreAScene::onResolveCCBCCMenuItemSelector(Ref *pTarget, char const *pSelectorName) {
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onBack", StoreAScene::onBack)
     CCB_SELECTORRESOLVER_CCMENUITEM_GLUE(this, "onMoreMuffins", StoreAScene::onMoreMuffins)
 
     return NULL;
 }
 
-void StoreAScene::onMoreMuffins(CCObject *pSender) {
+void StoreAScene::onMoreMuffins(Ref *pSender) {
     CC_UNUSED_PARAM(pSender);
 
-    CCScene *s = StoreBScene::getStoreBScene();
-    CCDirector::sharedDirector()->setDepthTest(true);
-    CCTransitionScene *transition = CCTransitionMoveInR::create(0.8f, s);
+    Scene *s = StoreBScene::getStoreBScene();
+    CCDirector::getInstance()->setDepthTest(true);
+    TransitionScene *transition = TransitionMoveInR::create(0.8f, s);
 
-    CCDirector::sharedDirector()->replaceScene(transition);
+    CCDirector::getInstance()->replaceScene(transition);
 }
 
 
 void StoreAScene::onEnter() {
     CCLayer::onEnter();
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+    __NotificationCenter::getInstance()->addObserver(this,
             callfuncO_selector(StoreAScene::updateCurrencyBalance),
             EVENT_ON_CURRENCY_BALANCE_CHANGED, NULL);
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+    __NotificationCenter::getInstance()->addObserver(this,
             callfuncO_selector(StoreAScene::updateGoodBalance),
             EVENT_ON_GOOD_BALANCE_CHANGED, NULL);
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+    __NotificationCenter::getInstance()->addObserver(this,
             callfuncO_selector(StoreAScene::onGoodEquipped),
             EVENT_ON_GOOD_EQUIPPED, NULL);
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+    __NotificationCenter::getInstance()->addObserver(this,
             callfuncO_selector(StoreAScene::onGoodUnEquipped),
             EVENT_ON_GOOD_UNEQUIPPED, NULL);
-    CCNotificationCenter::sharedNotificationCenter()->addObserver(this,
+    __NotificationCenter::getInstance()->addObserver(this,
             callfuncO_selector(StoreAScene::onGoodUpgrade),
             EVENT_ON_GOOD_UPGRADE, NULL);
 }
 
 void StoreAScene::onExit() {
-    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_CURRENCY_BALANCE_CHANGED);
-    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_GOOD_BALANCE_CHANGED);
-    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_GOOD_EQUIPPED);
-    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_GOOD_UNEQUIPPED);
-    CCNotificationCenter::sharedNotificationCenter()->removeObserver(this, EVENT_ON_GOOD_UPGRADE);
-    CCLayer::onExit();
+    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_CURRENCY_BALANCE_CHANGED);
+    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_GOOD_BALANCE_CHANGED);
+    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_GOOD_EQUIPPED);
+    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_GOOD_UNEQUIPPED);
+    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_GOOD_UPGRADE);
+    Layer::onExit();
 }
 
-void StoreAScene::onBack(CCObject *pSender) {
+void StoreAScene::onBack(Ref *pSender) {
     CC_UNUSED_PARAM(pSender);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     CCSoomlaStore::getInstance()->stopIabServiceInBg();
 #endif
 
-    CCScene *s = MainScene::getMainScene();
-    CCDirector::sharedDirector()->setDepthTest(true);
-    CCTransitionScene *transition = CCTransitionMoveInL::create(0.8f, s);
+    Scene *s = MainScene::getMainScene();
+    CCDirector::getInstance()->setDepthTest(true);
+    TransitionScene *transition = TransitionMoveInL::create(0.8f, s);
 
-    CCDirector::sharedDirector()->replaceScene(transition);
+    CCDirector::getInstance()->replaceScene(transition);
 }
 
 string StoreAScene::itemIdFromTag(int tag) {
@@ -259,13 +259,13 @@ string StoreAScene::itemIdFromTag(int tag) {
     }
 }
 
-CCScene *StoreAScene::getGoodsStoreScene() {
-    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::sharedNodeLoaderLibrary();
+Scene *StoreAScene::getGoodsStoreScene() {
+    NodeLoaderLibrary * ccNodeLoaderLibrary = NodeLoaderLibrary::getInstance();
 
-    ccNodeLoaderLibrary->registerCCNodeLoader("StoreAScene", StoreASceneLoader::loader());
-    ccNodeLoaderLibrary->registerCCNodeLoader("LevelIconWidget", LevelIconWidgetLoader::loader());
-    ccNodeLoaderLibrary->registerCCNodeLoader("CCTableView", CCTableViewLoader::loader());
-    ccNodeLoaderLibrary->registerCCNodeLoader("CCTableViewCell", CCTableViewCellLoader::loader());
+    ccNodeLoaderLibrary->registerNodeLoader("StoreAScene", StoreASceneLoader::loader());
+    ccNodeLoaderLibrary->registerNodeLoader("LevelIconWidget", LevelIconWidgetLoader::loader());
+    ccNodeLoaderLibrary->registerNodeLoader("CCTableView", CCTableViewLoader::loader());
+    ccNodeLoaderLibrary->registerNodeLoader("CCTableViewCell", CCTableViewCellLoader::loader());
 
     CCBReader *ccbReader = new CCBReader(ccNodeLoaderLibrary);
 
@@ -274,13 +274,17 @@ CCScene *StoreAScene::getGoodsStoreScene() {
 
 void StoreAScene::updateCurrencyBalance(Ref *pBalance) {
     char buf[20] = "/0";
-    sprintf(buf, "%i", ((CCInteger*)pBalance)->getValue());
+    sprintf(buf, "%i", ((__Integer*)pBalance)->getValue());
     mMuffinAmount->setString(buf);
+    
+    for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
+        mListItem[i]->updateAfford();
+    }
 }
 
 void StoreAScene::updateGoodBalance(Ref *pParams) {
-    soomla::CCVirtualGood *virtualGood = (CCVirtualGood *) ((CCArray*)pParams)->objectAtIndex(0);
-    CCInteger *balance = (CCInteger *) ((CCArray*)pParams)->objectAtIndex(1);
+    soomla::CCVirtualGood *virtualGood = (CCVirtualGood *) ((__Array*)pParams)->getObjectAtIndex(0);
+    __Integer *balance = (__Integer *) ((__Array*)pParams)->getObjectAtIndex(1);
 
     ////*****
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
@@ -335,7 +339,7 @@ ssize_t StoreAScene::numberOfCellsInTableView(TableView *table) {
     return NUMBER_OF_ROWS;
 }
 
-CCSize StoreAScene::tableCellSizeForIndex(TableView *table, ssize_t idx) {
+Size StoreAScene::tableCellSizeForIndex(TableView *table, ssize_t idx) {
     CC_UNUSED_PARAM(table);
 
     return mListRows[NUMBER_OF_ROWS - idx - 1]->getContentSize();
@@ -365,25 +369,25 @@ void StoreAScene::setEquippedForItem(string &itemId, LevelIconWidget *pWidget) {
 
 //Utils
 
-float applyScaleForNode(cocos2d::CCNode* node) {
-    cocos2d::CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+float applyScaleForNode(cocos2d::Node* node) {
+    cocos2d::Size winSize = CCDirector::getInstance()->getWinSize();
     float scale = std::min(winSize.width / node->getContentSize().width,
             winSize.height / node->getContentSize().height);
     node->setScale(scale);
-    node->setPosition(ccp((winSize.width - node->getContentSize().width * scale) / 2,
+    node->setPosition(Vec2((winSize.width - node->getContentSize().width * scale) / 2,
     (winSize.height - node->getContentSize().height * scale) / 2));
 
     return scale;
 }
 
-void fill(cocos2d::CCNode* targetNode) {
-    CCPoint leftBottom =
+void fill(cocos2d::Node* targetNode) {
+    Vec2 leftBottom =
             targetNode->getParent()->convertToWorldSpace(targetNode->getPosition());
-    CCPoint rightTop =
+    Vec2 rightTop =
             targetNode->getParent()->convertToWorldSpace(
-                    ccpAdd(targetNode->getPosition(), ccpFromSize(targetNode->getContentSize())));
+                    targetNode->getPosition() + Vec2(targetNode->getContentSize()));
 
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    Size winSize = CCDirector::getInstance()->getWinSize();
 
     float scaleX = winSize.width / (rightTop.x - leftBottom.x);
     float scaleY = winSize.height / (rightTop.y - leftBottom.y);
@@ -391,49 +395,49 @@ void fill(cocos2d::CCNode* targetNode) {
     targetNode->setScale(MAX(scaleX, scaleY));
 }
 
-void shiftToLeftBottom(cocos2d::CCNode* targetNode) {
-    CCPoint position = targetNode->getParent()->convertToNodeSpace(ccp(0, 0));
+void shiftToLeftBottom(cocos2d::Node* targetNode) {
+    Vec2 position = targetNode->getParent()->convertToNodeSpace(Vec2(0, 0));
     targetNode->setPosition(position);
 }
 
-void shiftToTop(cocos2d::CCNode* targetNode) {
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
-    CCPoint position =
-            targetNode->getParent()->convertToNodeSpace(ccp(winSize.width, winSize.height));
+void shiftToTop(cocos2d::Node* targetNode) {
+    Size winSize = CCDirector::getInstance()->getWinSize();
+    Vec2 position =
+            targetNode->getParent()->convertToNodeSpace(Vec2(winSize.width, winSize.height));
     targetNode->setPositionY(position.y);
 }
 
-void shiftToBottom(cocos2d::CCNode* targetNode) {
-    CCPoint position = targetNode->getParent()->convertToNodeSpace(ccp(0, 0));
+void shiftToBottom(cocos2d::Node* targetNode) {
+    Vec2 position = targetNode->getParent()->convertToNodeSpace(Vec2(0, 0));
     targetNode->setPositionY(position.y);
 }
 
-void fillWidth(cocos2d::CCNode* targetNode) {
-    CCPoint leftBottom =
+void fillWidth(cocos2d::Node* targetNode) {
+    Vec2 leftBottom =
             targetNode->getParent()->convertToWorldSpace(targetNode->getPosition());
-    CCPoint rightTop =
+    Vec2 rightTop =
             targetNode->getParent()->convertToWorldSpace(
-                    ccpAdd(targetNode->getPosition(), ccpFromSize(targetNode->getContentSize())));
+                    targetNode->getPosition() + Vec2(targetNode->getContentSize()));
 
-    CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+    Size winSize = CCDirector::getInstance()->getWinSize();
 
     targetNode->setScale(winSize.width / (rightTop.x - leftBottom.x));
 }
 
-void putToCenterMiddleOf(cocos2d::CCNode* targetNode, cocos2d::CCNode* anchorNode) {
+void putToCenterMiddleOf(cocos2d::Node* targetNode, cocos2d::Node* anchorNode) {
 
-    CCPoint leftBottom =
+    Vec2 leftBottom =
             anchorNode->convertToWorldSpaceAR(
-                    ccpSub(CCPointZero, ccpCompMult(
-                            ccp(anchorNode->getAnchorPoint().x, anchorNode->getAnchorPoint().y),
-                            ccpFromSize(anchorNode->getContentSize()))));
-    CCPoint rightTop =
+                                              Vec2::ZERO - ccpCompMult(
+                                                                       Vec2(anchorNode->getAnchorPoint().x, anchorNode->getAnchorPoint().y),
+                                                                       Vec2(anchorNode->getContentSize())));
+    Vec2 rightTop =
             anchorNode->convertToWorldSpaceAR(
-                    ccpAdd(CCPointZero, ccpCompMult(
-                            ccp(1 - anchorNode->getAnchorPoint().x, 1 - anchorNode->getAnchorPoint().y),
-                            ccpFromSize(anchorNode->getContentSize()))));
+                                              Vec2::ZERO + ccpCompMult(
+                                                                       Vec2(1 - anchorNode->getAnchorPoint().x, 1 - anchorNode->getAnchorPoint().y),
+                                                                       Vec2(anchorNode->getContentSize())));
 
-    CCPoint globalPosition = ccp(leftBottom.x + (rightTop.x - leftBottom.x) / 2, leftBottom.y + (rightTop.y - leftBottom.y) / 2);
+    Vec2 globalPosition = Vec2(leftBottom.x + (rightTop.x - leftBottom.x) / 2, leftBottom.y + (rightTop.y - leftBottom.y) / 2);
 
     targetNode->setPosition(targetNode->getParent()->convertToNodeSpace(globalPosition));
 }

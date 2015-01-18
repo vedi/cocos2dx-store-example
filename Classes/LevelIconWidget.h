@@ -12,7 +12,7 @@ USING_NS_CC_EXT;
 using namespace cocosbuilder;
 
 
-class LevelIconWidget: public CCNode,
+class LevelIconWidget: public Node,
                        public CCBSelectorResolver,
                        public CCBMemberVariableAssigner,
                        public NodeLoaderListener {
@@ -22,37 +22,40 @@ public:
 
     LevelIconWidget();
 
-    virtual bool onAssignCCBMemberVariable(CCObject* pTarget, const char* pMemberVariableName, CCNode* pNode);
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(CCObject * pTarget, const char* pSelectorName);
-    virtual void onNodeLoaded(CCNode * pNode, NodeLoader * pNodeLoader);
+    virtual bool onAssignCCBMemberVariable(Ref* pTarget, const char* pMemberVariableName, Node* pNode);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(Ref *pTarget, char const *pSelectorName);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(Ref * pTarget, const char* pSelectorName);
+    virtual void onNodeLoaded(Node * pNode, NodeLoader * pNodeLoader);
 
     void setData(char const *itemId, char const *name, char const *description, double price, int balance);
     void setBalance(int balance);
     void setProgress(int progress);
     void setEquiped(bool equiped);
+    void updateAfford();
 
 private:
     std::string mItemId;
 private:
     Label *mGoodsTitle;
     Label *mDescriptionLabel;
-    CCSprite *mProgressBar;
-    CCSprite *mProgressLevel1;
-    CCNode *mMenu;
-    CCMenuItemImage *mButtonBuy;
-    CCMenuItemImage *mButtonUpgrade;
-    CCMenuItemImage *mEquipment;
+    Sprite *mProgressBar;
+    Sprite *mProgressLevel1;
+    Node *mMenu;
+    MenuItemImage *mButtonBuy;
+    MenuItemImage *mButtonUpgrade;
+    MenuItemImage *mEquipment;
     Label *mPrice;
     Label *mBalance;
 
     bool mEquipable;
+    bool mUpgradable;
     bool mEquiped;
+    int mCurrentBalance;
 
     //selectors
-    void onBuy(CCObject *pSender);
-    void onUpgrade(CCObject *pSender);
-    void onEquipment(CCObject *pSender);
+    void onBuy(Ref *pSender);
+    void onUpgrade(Ref *pSender);
+    void onEquipment(Ref *pSender);
 };
 
 

@@ -19,7 +19,7 @@ using namespace cocosbuilder;
 
 #define NUMBER_OF_ROWS 14
 
-class StoreAScene : public CCLayer,
+class StoreAScene : public Layer,
                         public CCBSelectorResolver,
                         public CCBMemberVariableAssigner,
                         public NodeLoaderListener,
@@ -27,7 +27,7 @@ class StoreAScene : public CCLayer,
                         public TableViewDelegate
 {
 public:
-    static CCScene* getGoodsStoreScene();
+    static Scene* getGoodsStoreScene();
 
     CREATE_FUNC(StoreAScene);
     virtual ~StoreAScene();
@@ -35,10 +35,10 @@ public:
 protected:
     StoreAScene();
 
-    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(CCObject *pTarget, char const *pSelectorName);
-    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(CCObject *pTarget, char const *pSelectorName) {return NULL;};
-    virtual bool onAssignCCBMemberVariable(CCObject *pTarget, char const *pMemberVariableName, CCNode *pNode);
-    virtual void onNodeLoaded(CCNode *pNode, NodeLoader *pNodeLoader);
+    virtual SEL_MenuHandler onResolveCCBCCMenuItemSelector(Ref *pTarget, char const *pSelectorName);
+    virtual cocos2d::extension::Control::Handler onResolveCCBCCControlSelector(Ref *pTarget, char const *pSelectorName) {return NULL;};
+    virtual bool onAssignCCBMemberVariable(Ref *pTarget, char const *pMemberVariableName, Node *pNode);
+    virtual void onNodeLoaded(Node *pNode, NodeLoader *pNodeLoader);
 
     virtual void onEnter();
     virtual void onExit();
@@ -51,21 +51,21 @@ private:
     virtual void onGoodUpgrade(Ref *virtualGood);
 
     //ccb
-    CCNode *mBackgroundNode;
-    CCLayerColor *mBackground;
-    CCNode *mMainNode;
-    CCNode *mTopNode;
+    Node *mBackgroundNode;
+    LayerColor *mBackground;
+    Node *mMainNode;
+    Node *mTopNode;
     Label *mMuffinAmount;
     TableView *mGoodsTableView;
     TableViewCell *mListRows[NUMBER_OF_ROWS];
     LevelIconWidget *mListItem[NUMBER_OF_ROWS];
-    CCNode *mBottomNode;
-    CCMenuItemImage *mButtonBack;
-    CCMenuItemImage *mButtonMoreMuffins;
+    Node *mBottomNode;
+    MenuItemImage *mButtonBack;
+    MenuItemImage *mButtonMoreMuffins;
 
     //selectors
-    void onBack(CCObject *pSender);
-    void onMoreMuffins(CCObject *pSender);
+    void onBack(Ref *pSender);
+    void onMoreMuffins(Ref *pSender);
 
     //class vars
     LevelIconWidget *mCacheListItems[NUMBER_OF_ROWS];
@@ -74,7 +74,7 @@ private:
 
     virtual TableViewCell* tableCellAtIndex(TableView *table, ssize_t idx);
     virtual ssize_t numberOfCellsInTableView(TableView *table);
-    virtual CCSize tableCellSizeForIndex(TableView *table, ssize_t idx) override;
+    virtual Size tableCellSizeForIndex(TableView *table, ssize_t idx) override;
 public:
     virtual void tableCellTouched(TableView *table, TableViewCell *cell) {}
     virtual void scrollViewDidScroll(ScrollView *view) {};
@@ -94,9 +94,9 @@ class CCTableViewLoader : public ScrollViewLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CCTableViewLoader, loader);
 protected:
-    virtual TableView * createNode(cocos2d::CCNode * pParent, CCBReader * pCCBReader) {
+    virtual TableView * createNode(cocos2d::Node * pParent, CCBReader * pCCBReader) {
         TableView *pRet = new TableView();
-        pRet->initWithViewSize(CCSizeZero, NULL);
+        pRet->initWithViewSize(Size::ZERO, NULL);
         pRet->autorelease();
         pRet->setDataSource(NULL);
         return pRet;
@@ -107,7 +107,7 @@ class CCTableViewCellLoader : public NodeLoader {
 public:
     CCB_STATIC_NEW_AUTORELEASE_OBJECT_METHOD(CCTableViewCellLoader, loader);
 protected:
-    virtual TableViewCell * createNode(cocos2d::CCNode * pParent, CCBReader * pCCBReader) {
+    virtual TableViewCell * createNode(cocos2d::Node * pParent, CCBReader * pCCBReader) {
         TableViewCell *pRet = new TableViewCell();
         pRet->autorelease();
         return pRet;
@@ -115,18 +115,18 @@ protected:
 };
 
 //Utils methods
-float applyScaleForNode(cocos2d::CCNode* node);
+float applyScaleForNode(cocos2d::Node* node);
 
-void fill(cocos2d::CCNode* targetNode);
+void fill(cocos2d::Node* targetNode);
 
-void shiftToLeftBottom(cocos2d::CCNode* targetNode);
+void shiftToLeftBottom(cocos2d::Node* targetNode);
 
-void shiftToTop(cocos2d::CCNode* targetNode);
+void shiftToTop(cocos2d::Node* targetNode);
 
-void shiftToBottom(cocos2d::CCNode* targetNode);
+void shiftToBottom(cocos2d::Node* targetNode);
 
-void fillWidth(cocos2d::CCNode* targetNode);
+void fillWidth(cocos2d::Node* targetNode);
 
-void putToCenterMiddleOf(cocos2d::CCNode* targetNode, cocos2d::CCNode* anchorNode);
+void putToCenterMiddleOf(cocos2d::Node* targetNode, cocos2d::Node* anchorNode);
 
 #endif //__StoreAScene_H_
