@@ -16,6 +16,8 @@
 
 #include "ExampleEventHandler.h"
 #include "cocos2d.h"
+#include "CCStoreInfo.h"
+#include "MuffinRushAssets.h"
 
 #define TAG "ExampleEventHandler >>>"
 
@@ -104,6 +106,10 @@ void ExampleEventHandler::onMarketItemsRefreshed(cocos2d::__Array *virtualItems)
 
 void ExampleEventHandler::onMarketItemsRefreshStarted() {
     CCSoomlaUtils::logDebug(TAG, "MarketItemsRefreshStarted");
+}
+
+void ExampleEventHandler::onMarketItemsRefreshFailed(cocos2d::__String *errorMessage) {
+    CCSoomlaUtils::logDebug(TAG, __String::createWithFormat("MarketItemsRefreshFailed %s", errorMessage->getCString())->getCString());
 }
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

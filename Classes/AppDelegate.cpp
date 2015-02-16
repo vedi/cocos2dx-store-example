@@ -38,6 +38,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     __Dictionary *commonParams = __Dictionary::create();
     commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
     soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+    
+    soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(handler);
 
     __Dictionary *storeParams = __Dictionary::create();
     storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
@@ -65,8 +67,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
                         giveItem(vc->getItemId()->getCString(), 10000 - balance, NULL);
             }
         }
-
-    soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(handler);
 
     // initialize director
     auto director = Director::getInstance();
