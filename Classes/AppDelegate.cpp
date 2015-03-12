@@ -32,20 +32,18 @@ AppDelegate::~AppDelegate()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
-
-    MuffinRushAssets *assets = MuffinRushAssets::create();
     
-    __Dictionary *commonParams = __Dictionary::create();
-    commonParams->setObject(__String::create("ExampleCustomSecret"), "customSecret");
-    soomla::CCServiceManager::getInstance()->setCommonParams(commonParams);
+    soomla::CCSoomla::initialize("customSecret");
     
     soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(handler);
 
+    MuffinRushAssets *assets = MuffinRushAssets::create();
+    
     __Dictionary *storeParams = __Dictionary::create();
     storeParams->setObject(__String::create("ExamplePublicKey"), "androidPublicKey");
     storeParams->setObject(__Bool::create(true), "testPurchases");
 
-    soomla::CCStoreService::initShared(assets, storeParams);
+    soomla::CCSoomlaStore::initialize(assets, storeParams);
 
     /*
      * ** Set the amount of each currency to 10,000 if the **

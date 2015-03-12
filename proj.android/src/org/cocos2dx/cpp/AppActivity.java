@@ -26,36 +26,16 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.cpp;
 
-import com.soomla.cocos2dx.common.ServiceManager;
-import com.soomla.cocos2dx.store.StoreService;
+import com.soomla.SoomlaConfig;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
-import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 public class AppActivity extends Cocos2dxActivity {
     @Override
-    public Cocos2dxGLSurfaceView onCreateView() {
-        Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this);
+    public void init() {
+        super.init();
 
-        glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
-
-        // initialize services
-        final ServiceManager serviceManager = ServiceManager.getInstance();
-        serviceManager.setActivity(this);
-        serviceManager.setGlSurfaceView(glSurfaceView);
-        serviceManager.registerService(StoreService.getInstance());
-
-        return glSurfaceView;
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        ServiceManager.getInstance().onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        ServiceManager.getInstance().onResume();
-        super.onResume();
+        // Uncomment this for native logs
+        // SoomlaConfig.logDebug = true;
     }
 }
