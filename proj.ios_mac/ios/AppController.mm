@@ -34,8 +34,7 @@
 
 #import "AppDelegate.h"
 #import "RootViewController.h"
-#import "ServiceManager.h"
-#import "StoreService.h"
+//#import "SoomlaConfig.h"
 
 @implementation AppController
 
@@ -47,9 +46,10 @@ static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [[ServiceManager sharedServiceManager] registerService:[StoreService sharedStoreService]];
-
     // Override point for customization after application launch.
+    
+    // Uncomment this (and SoomlaConfig.h above) if you want native logs
+    // DEBUG_LOG = YES;
 
     // Add the view controller's view to the window and display.
     window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];

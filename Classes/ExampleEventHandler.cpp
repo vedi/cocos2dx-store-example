@@ -97,7 +97,7 @@ void ExampleEventHandler::onUnexpectedErrorInStore(cocos2d::__String *errorMessa
 }
 
 void ExampleEventHandler::onSoomlaStoreInitialized() {
-    CCSoomlaUtils::logDebug(TAG, "StoreContorllerInitialized");
+    CCSoomlaUtils::logDebug(TAG, "onSoomlaStoreInitialized");
 }
 
 void ExampleEventHandler::onMarketItemsRefreshed(cocos2d::__Array *virtualItems) {
