@@ -22,9 +22,9 @@ While the 3rd version of cocos2d-x is not stable, we put all related code to bra
     $ git clone git@github.com:soomla/cocos2dx-store.git extensions/cocos2dx-store
     ```
 
-3. Clone our [fork](https://github.com/vedi/jansson) of the janssen library into the `external` directory in the root of your Cocos2d-x framework.
+3. Clone our [fork](https://github.com/soomla/jansson) of the janssen library into the `external` directory in the root of your Cocos2d-x framework.
     ```
-    $ git clone git@github.com:vedi/jansson.git external/jansson
+    $ git clone git@github.com:soomla/jansson.git external/jansson
     ```
 
 4. Clone cocos2dx-store-example into the `projects` directory at the root of the Cocos2d-x framework.
@@ -89,4 +89,3 @@ IMPORTANT: If you would like to contribute, please follow our [Documentation Gui
 
 Apache License. Copyright (c) 2012-2014 SOOMLA. http://soom.la
 + http://opensource.org/licenses/Apache-2.0
-
