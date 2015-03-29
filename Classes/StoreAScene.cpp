@@ -177,29 +177,25 @@ void StoreAScene::onMoreMuffins(Ref *pSender) {
 
 void StoreAScene::onEnter() {
     CCLayer::onEnter();
-    __NotificationCenter::getInstance()->addObserver(this,
-            callfuncO_selector(StoreAScene::updateCurrencyBalance),
-            EVENT_ON_CURRENCY_BALANCE_CHANGED, NULL);
-    __NotificationCenter::getInstance()->addObserver(this,
-            callfuncO_selector(StoreAScene::updateGoodBalance),
-            EVENT_ON_GOOD_BALANCE_CHANGED, NULL);
-    __NotificationCenter::getInstance()->addObserver(this,
-            callfuncO_selector(StoreAScene::onGoodEquipped),
-            EVENT_ON_GOOD_EQUIPPED, NULL);
-    __NotificationCenter::getInstance()->addObserver(this,
-            callfuncO_selector(StoreAScene::onGoodUnEquipped),
-            EVENT_ON_GOOD_UNEQUIPPED, NULL);
-    __NotificationCenter::getInstance()->addObserver(this,
-            callfuncO_selector(StoreAScene::onGoodUpgrade),
-            EVENT_ON_GOOD_UPGRADE, NULL);
+    
+    currencyBalanceChangedHandler = Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_CURRENCY_BALANCE_CHANGED,
+                                                                          CC_CALLBACK_1(StoreAScene::onCurrencyBalanceChanged, this));
+    goodBalanceChangedHandler = Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_BALANCE_CHANGED,
+                                                                          CC_CALLBACK_1(StoreAScene::updateGoodBalance, this));
+    goodEquippedHandler = Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_EQUIPPED,
+                                                                          CC_CALLBACK_1(StoreAScene::onGoodEquipped, this));
+    goodUnequippedHandler = Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_UNEQUIPPED,
+                                                                          CC_CALLBACK_1(StoreAScene::onGoodUnEquipped, this));
+    goodUpgradeHandler = Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_GOOD_UPGRADE,
+                                                                          CC_CALLBACK_1(StoreAScene::onGoodUpgrade, this));
 }
 
 void StoreAScene::onExit() {
-    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_CURRENCY_BALANCE_CHANGED);
-    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_GOOD_BALANCE_CHANGED);
-    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_GOOD_EQUIPPED);
-    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_GOOD_UNEQUIPPED);
-    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_GOOD_UPGRADE);
+    Director::getInstance()->getEventDispatcher()->removeEventListener(currencyBalanceChangedHandler);
+    Director::getInstance()->getEventDispatcher()->removeEventListener(goodBalanceChangedHandler);
+    Director::getInstance()->getEventDispatcher()->removeEventListener(goodEquippedHandler);
+    Director::getInstance()->getEventDispatcher()->removeEventListener(goodUnequippedHandler);
+    Director::getInstance()->getEventDispatcher()->removeEventListener(goodUpgradeHandler);
     Layer::onExit();
 }
 
@@ -272,9 +268,16 @@ Scene *StoreAScene::getGoodsStoreScene() {
     return ccbReader->createSceneWithNodeGraphFromFile("ccb/StoreAScene.ccbi");
 }
 
-void StoreAScene::updateCurrencyBalance(Ref *pBalance) {
+void StoreAScene::onCurrencyBalanceChanged(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    __Integer *pBalance = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE));
+    
+    updateCurrencyBalance(pBalance);
+}
+
+void StoreAScene::updateCurrencyBalance(__Integer *pBalance) {
     char buf[20] = "/0";
-    sprintf(buf, "%i", ((__Integer*)pBalance)->getValue());
+    sprintf(buf, "%i", pBalance->getValue());
     mMuffinAmount->setString(buf);
     
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
@@ -282,9 +285,10 @@ void StoreAScene::updateCurrencyBalance(Ref *pBalance) {
     }
 }
 
-void StoreAScene::updateGoodBalance(Ref *pParams) {
-    soomla::CCVirtualGood *virtualGood = (CCVirtualGood *) ((__Array*)pParams)->getObjectAtIndex(0);
-    __Integer *balance = (__Integer *) ((__Array*)pParams)->getObjectAtIndex(1);
+void StoreAScene::updateGoodBalance(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    soomla::CCVirtualGood *virtualGood = dynamic_cast<CCVirtualGood *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_GOOD));
+    __Integer *balance = dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE));
 
     ////*****
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
@@ -297,30 +301,39 @@ void StoreAScene::updateGoodBalance(Ref *pParams) {
 }
 
 
-void StoreAScene::onGoodEquipped(Ref *virtualGood) {
+void StoreAScene::onGoodEquipped(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    soomla::CCEquippableVG *virtualGood = dynamic_cast<CCEquippableVG *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_EQUIPPABLEVG));
+    
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
         string itemId = itemIdFromTag(i);
-        if (((soomla::CCVirtualGood *)virtualGood)->getItemId()->compare(itemId.c_str()) == 0) {
+        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
             mListItem[i]->setEquiped(true);
             break;
         }
     }
 }
 
-void StoreAScene::onGoodUnEquipped(Ref *virtualGood) {
+void StoreAScene::onGoodUnEquipped(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    soomla::CCEquippableVG *virtualGood = dynamic_cast<CCEquippableVG *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_EQUIPPABLEVG));
+    
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
         string itemId = itemIdFromTag(i);
-        if (((soomla::CCVirtualGood *)virtualGood)->getItemId()->compare(itemId.c_str()) == 0) {
+        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
             mListItem[i]->setEquiped(false);
             break;
         }
     }
 }
 
-void StoreAScene::onGoodUpgrade(Ref *virtualGood) {
+void StoreAScene::onGoodUpgrade(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    soomla::CCVirtualGood *virtualGood = dynamic_cast<CCVirtualGood *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_GOOD));
+    
     for (unsigned int i = 0; i < NUMBER_OF_ROWS; i++) {
         string itemId = itemIdFromTag(i);
-        if (((CCVirtualGood *)virtualGood)->getItemId()->compare(itemId.c_str()) == 0) {
+        if (virtualGood->getItemId()->compare(itemId.c_str()) == 0) {
             setProgressForItem(itemId, mListItem[i]);
             break;
         }

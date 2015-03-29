@@ -89,13 +89,13 @@ string StoreBScene::itemIdFromTag(int tag) {
 
 void StoreBScene::onEnter() {
     Layer::onEnter();
-    __NotificationCenter::getInstance()->addObserver(this,
-            callfuncO_selector(StoreBScene::updateCurrencyBalance),
-            EVENT_ON_CURRENCY_BALANCE_CHANGED, NULL);
+    
+    currencyBalanceChangedListener = Director::getInstance()->getEventDispatcher()->addCustomEventListener(CCStoreConsts::EVENT_CURRENCY_BALANCE_CHANGED,
+                                                                                                           CC_CALLBACK_1(StoreBScene::onCurrencyBalanceChanged, this));
 }
 
 void StoreBScene::onExit() {
-    __NotificationCenter::getInstance()->removeObserver(this, EVENT_ON_CURRENCY_BALANCE_CHANGED);
+    Director::getInstance()->getEventDispatcher()->removeEventListener(currencyBalanceChangedListener);
     CCLayer::onExit();
 }
 
@@ -181,9 +181,14 @@ bool StoreBScene::onAssignCCBMemberVariable(Ref *pTarget, char const *pMemberVar
     return false;
 }
 
-void StoreBScene::updateCurrencyBalance(Ref *pBalance) {
+void StoreBScene::onCurrencyBalanceChanged(cocos2d::EventCustom *event) {
+    __Dictionary *eventData = (__Dictionary *)event->getUserData();
+    updateCurrencyBalance(dynamic_cast<__Integer *>(eventData->objectForKey(CCStoreConsts::DICT_ELEMENT_BALANCE)));
+}
+
+void StoreBScene::updateCurrencyBalance(__Integer *pBalance) {
     char buf[20] = "/0";
-    sprintf(buf, "%i", ((__Integer *)pBalance)->getValue());
+    sprintf(buf, "%i", pBalance->getValue());
     mMuffinAmount->setString(buf);
 }
 

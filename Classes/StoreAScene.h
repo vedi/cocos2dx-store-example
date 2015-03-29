@@ -44,11 +44,12 @@ protected:
     virtual void onExit();
 
 private:
-    virtual void updateCurrencyBalance(Ref *pBalance);
-    virtual void updateGoodBalance(Ref *pParams);
-    virtual void onGoodEquipped(Ref *virtualGood);
-    virtual void onGoodUnEquipped(Ref *virtualGood);
-    virtual void onGoodUpgrade(Ref *virtualGood);
+    virtual void onCurrencyBalanceChanged(cocos2d::EventCustom *event);
+    virtual void updateCurrencyBalance(cocos2d::__Integer *balance);
+    virtual void updateGoodBalance(cocos2d::EventCustom *event);
+    virtual void onGoodEquipped(cocos2d::EventCustom *event);
+    virtual void onGoodUnEquipped(cocos2d::EventCustom *event);
+    virtual void onGoodUpgrade(cocos2d::EventCustom *event);
 
     //ccb
     Node *mBackgroundNode;
@@ -75,6 +76,12 @@ private:
     virtual TableViewCell* tableCellAtIndex(TableView *table, ssize_t idx);
     virtual ssize_t numberOfCellsInTableView(TableView *table);
     virtual Size tableCellSizeForIndex(TableView *table, ssize_t idx) override;
+    
+    cocos2d::EventListener *currencyBalanceChangedHandler;
+    cocos2d::EventListener *goodBalanceChangedHandler;
+    cocos2d::EventListener *goodEquippedHandler;
+    cocos2d::EventListener *goodUnequippedHandler;
+    cocos2d::EventListener *goodUpgradeHandler;
 public:
     virtual void tableCellTouched(TableView *table, TableViewCell *cell) {}
     virtual void scrollViewDidScroll(ScrollView *view) {};

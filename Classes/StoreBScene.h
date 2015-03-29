@@ -57,7 +57,8 @@ public:
     virtual bool onAssignCCBMemberVariable(Ref *pTarget, char const *pMemberVariableName, Node *pNode);
     virtual void onNodeLoaded(Node *pNode, NodeLoader *pNodeLoader);
 
-    virtual void updateCurrencyBalance(Ref *pBalance);
+    virtual void updateCurrencyBalance(cocos2d::__Integer *balance);
+    virtual void onCurrencyBalanceChanged(cocos2d::EventCustom *event);
 
     virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event *event) override;
 private:
@@ -71,6 +72,8 @@ private:
     Label *mGoodTitles[GOODS_NUMBER];
     Label *mGoodDescriptions[GOODS_NUMBER];
     Label *mPrices[GOODS_NUMBER];
+        
+    cocos2d::EventListener *currencyBalanceChangedListener;
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();  
