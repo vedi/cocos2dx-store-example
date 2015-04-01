@@ -10,7 +10,7 @@ This project contains examples for implementing all of SOOMLA's interfaces and u
 
 While the 3rd version of cocos2d-x is not stable, we put all related code to branch: `cocos2dx-v3`. Please, consider to check out to this branch in example project, and in cocos2dx-store.
 
-1. Obtain the Cocos2d-x framework either from [git](https://github.com/cocos2d/cocos2d-x) or from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure to use the latest stable 3rd version of cocos2d-x (we tested with v3.0rc1).
+1. Obtain the Cocos2d-x framework either from [git](https://github.com/cocos2d/cocos2d-x) or from the [Cocos2d-x website](http://www.cocos2d-x.org/download). Make sure to use the latest stable 3rd version of cocos2d-x (we tested with v3.3/v3.4).
     ```
     $ git clone git@github.com:cocos2d/cocos2d-x.git
     ```
