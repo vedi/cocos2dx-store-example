@@ -20,63 +20,57 @@
 #include <string>
 #include "Cocos2dxStore.h"
 
-
-#define EVENT_ON_CURRENCY_BALANCE_CHANGED "onCurrencyBalanceChanged"
-#define EVENT_ON_GOOD_BALANCE_CHANGED "onGoodBalanceChanged"
-#define EVENT_ON_GOOD_EQUIPPED "onGoodEquipped"
-#define EVENT_ON_GOOD_UNEQUIPPED "onGoodUnEquipped"
-#define EVENT_ON_GOOD_UPGRADE "onGoodUpgrade"
-
 using namespace std;
 
-class ExampleEventHandler : public soomla::CCStoreEventHandler {
+class ExampleEventHandler {
 public:
-
-    virtual void onBillingNotSupported();
-
-    virtual void onBillingSupported();
-
-    virtual void onCurrencyBalanceChanged(soomla::CCVirtualCurrency *virtualCurrency, int balance, int amountAdded);
-
-    virtual void onGoodBalanceChanged(soomla::CCVirtualGood *virtualGood, int balance, int amountAdded);
-
-    virtual void onGoodEquipped(soomla::CCEquippableVG *equippableVG);
-
-    virtual void onGoodUnEquipped(soomla::CCEquippableVG *equippableVG);
-
-    virtual void onGoodUpgrade(soomla::CCVirtualGood *virtualGood, soomla::CCUpgradeVG *upgradeVG);
-
-    virtual void onItemPurchased(soomla::CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *payload);
-
-    virtual void onItemPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
-    virtual void onMarketPurchaseCancelled(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
-    virtual void onMarketPurchase(soomla::CCPurchasableVirtualItem *purchasableVirtualItem, cocos2d::__String *token, cocos2d::__String *payload);
-
-    virtual void onMarketPurchaseStarted(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
-    virtual void onMarketPurchaseVerification(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-
-    virtual void onRestoreTransactionsStarted();
-
-    virtual void onRestoreTransactionsFinished(bool success);
-
-    virtual void onUnexpectedErrorInStore(cocos2d::__String *errorMessage);
-
-    virtual void onSoomlaStoreInitialized();
-
-    virtual void onMarketItemsRefreshed(cocos2d::__Array *virtualItems);
-
-    virtual void onMarketItemsRefreshStarted();
     
-    virtual void onMarketItemsRefreshFailed(cocos2d::__String *errorMessage);
+    ExampleEventHandler();
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    virtual void onMarketRefund(soomla::CCPurchasableVirtualItem *purchasableVirtualItem);
-	virtual void onIabServiceStarted();
-	virtual void onIabServiceStopped();
-#endif
+    virtual void onBillingNotSupported(cocos2d::EventCustom *event);
+
+    virtual void onBillingSupported(cocos2d::EventCustom *event);
+
+    virtual void onCurrencyBalanceChanged(cocos2d::EventCustom *event);
+
+    virtual void onGoodBalanceChanged(cocos2d::EventCustom *event);
+
+    virtual void onGoodEquipped(cocos2d::EventCustom *event);
+
+    virtual void onGoodUnEquipped(cocos2d::EventCustom *event);
+
+    virtual void onGoodUpgrade(cocos2d::EventCustom *event);
+
+    virtual void onItemPurchased(cocos2d::EventCustom *event);
+
+    virtual void onItemPurchaseStarted(cocos2d::EventCustom *event);
+
+    virtual void onMarketPurchaseCancelled(cocos2d::EventCustom *event);
+
+    virtual void onMarketPurchase(cocos2d::EventCustom *event);
+
+    virtual void onMarketPurchaseStarted(cocos2d::EventCustom *event);
+
+    virtual void onMarketPurchaseVerification(cocos2d::EventCustom *event);
+
+    virtual void onRestoreTransactionsStarted(cocos2d::EventCustom *event);
+
+    virtual void onRestoreTransactionsFinished(cocos2d::EventCustom *event);
+
+    virtual void onUnexpectedErrorInStore(cocos2d::EventCustom *event);
+
+    virtual void onSoomlaStoreInitialized(cocos2d::EventCustom *event);
+
+    virtual void onMarketItemsRefreshed(cocos2d::EventCustom *event);
+
+    virtual void onMarketItemsRefreshStarted(cocos2d::EventCustom *event);
+    
+    virtual void onMarketItemsRefreshFailed(cocos2d::EventCustom *event);
+
+    // Android Only
+    virtual void onMarketRefund(cocos2d::EventCustom *event);
+	virtual void onIabServiceStarted(cocos2d::EventCustom *event);
+	virtual void onIabServiceStopped(cocos2d::EventCustom *event);
 };
 
 #endif /* !__ExampleEventHandler__ */

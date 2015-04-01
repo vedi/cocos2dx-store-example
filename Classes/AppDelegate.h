@@ -19,6 +19,7 @@
 
 #include "cocos2d.h"
 #include "Cocos2dxStore.h"
+#include "ExampleEventHandler.h"
 
 /**
 @brief    The cocos2d Application.
@@ -50,7 +51,7 @@ public:
     */
     virtual void applicationWillEnterForeground();
 
-    soomla::CCStoreEventHandler *handler;
+    ExampleEventHandler *handler;
 };
 
 #endif // _APP_DELEGATE_H_

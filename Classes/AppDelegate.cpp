@@ -23,19 +23,17 @@
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
-    handler = new ExampleEventHandler();
 }
 
 AppDelegate::~AppDelegate()
 {
-    soomla::CCStoreEventDispatcher::getInstance()->removeEventHandler(handler);
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
     
-    soomla::CCSoomla::initialize("customSecret");
+    handler = new ExampleEventHandler();
     
-    soomla::CCStoreEventDispatcher::getInstance()->addEventHandler(handler);
+    soomla::CCSoomla::initialize("customSecret");
 
     MuffinRushAssets *assets = MuffinRushAssets::create();
     
